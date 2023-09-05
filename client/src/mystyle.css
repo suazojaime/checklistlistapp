@@ -1,0 +1,294 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+*{
+    font-family: Helvetica;
+}
+
+.bigdiv{
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 30px;
+    width: 900px;
+}
+
+.clientWrapper {
+    background-color: rgb(255,204,0);
+    color: black;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    /* position: relative; */
+    transform: skewX(-30deg);
+}
+
+
+.clientWrapper:hover {
+    background-color: rgb(204, 163, 1);
+    color: black;
+    font-weight:bolder;
+    margin-bottom: 10px;
+    width: 250px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    /* position: relative; */
+    /* transform: skewX(-30deg); */
+    transition: 2s;
+}
+
+
+.clients{
+    transform: skewX(30deg); /* Opposite tilt to counteract parent's tilt */
+    display: inline-block; /* Maintain content in a line */
+    transform-origin: top right; /* Set transform origin to match parent's tilt origin */
+    padding-left: 30px;
+}
+
+.searchBar{
+    /* margin-bottom: 20px; */
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    /* position: relative; */
+    width: 100%;
+    background-color: black;
+    height: 100px;
+    color: white;
+}
+
+.clientsBody{
+    display: flex;
+    gap: 30px;
+}
+
+.clientsDetails{
+    background-color: rgb(204, 163, 1);
+    width: 100%;
+}
+
+.siteswrapper{
+    background-color:  rgb(255,204,0);
+    margin: 5px;
+    border: solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.sitetitle{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.summary{
+    min-width: 80%;
+    min-height: 100px;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    background: rgb(255,204,0);
+    background: radial-gradient(circle, rgba(255,236,177,1) 0%, rgba(241,184,62,0.8815165876777251) 92%);
+}
+
+.serverWrapper{
+    display:flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    gap:20px
+}
+.servercard{
+    flex-wrap: wrap;
+    width: 200px;
+    height: 200px;
+    background-color:  rgb(255,204,0);
+    border-radius: 20px;
+}
+
+.ServerTitle{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checklistwrapper{
+    display: flex;
+    background-color:  rgb(255,204,0);
+    margin: 5px;
+    border: solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.checklistlabel{
+    flex:1
+}
+
+.checklistcheckbox{
+    flex:1
+}
+
+.checklistfile{
+    flex:4
+}
+
+.submitButton{
+    background-color:  rgb(255,204,0);
+    margin: 20px;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    font-size: xx-large;
+    padding-top: 20px;
+    border: solid black;
+}
+
+.submitButton:hover{
+    cursor: pointer;
+}
+
+.logout{
+    /* position: absolute;
+    right: 0; */
+    margin-right: 100px;
+    background-color: white;
+    color: black;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid black;
+}
+
+.logout:hover{
+    cursor: pointer;
+}
+
+.logreqwrapper{
+    display: flex;
+    justify-content: space-around;
+}
+
+.register {
+    background-color: rgb(255, 204, 0);
+    color: black;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 250px;
+    /* padding-top: 5px;
+    padding-bottom: 50px;
+    padding-right: 50px; */
+    padding: 60px;
+    /* position: relative; */
+    transform: skewX(-30deg);
+    overflow: hidden; /* Hide overflowing skewed content */
+    position: relative; /* Maintain position context for child elements */
+    border-radius: 10px;
+}
+
+.register > * {
+    transform: skewX(30deg); /* Counter-tilt child elements */
+    display: inline-block;
+    transform-origin: top right;
+    padding-left: 3px; /* Adjust this value as needed */
+}
+
+
+.login {
+    background-color: rgb(255, 204, 0);
+    color: black;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 250px;
+    /* padding-top: 5px;
+    padding-bottom: 50px;
+    padding-right: 50px; */
+    padding: 60px;
+    /* position: relative; */
+    transform: skewX(-30deg);
+    overflow: hidden; /* Hide overflowing skewed content */
+    position: relative; /* Maintain position context for child elements */
+    border-radius: 10px;
+}
+
+.login > * {
+    transform: skewX(30deg); /* Counter-tilt child elements */
+    display: inline-block;
+    transform-origin: top right;
+    padding-left: 3px; /* Adjust this value as needed */
+}
+
+.logregbanner{
+    background-color: black;
+    color: white;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clientsBar{
+    font-size: xx-large;
+}
+
+.searchbarcontainer{
+    width: 900px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Addclientwrapper{    
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.addclienbutton{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+.addclienbutton:hover{
+    cursor: pointer;
+}
+
+.twobuttonswrapper{
+    display: flex;
+}
+
+.removeclientbutton{
+    background-color: rgb(189, 50, 50);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+.serverinput{
+    display: flex;
+    justify-content: space-around;
+}
+
+.ServerButtonsWrapper{
+    display:flex;
+    margin-top: 30px;
+
+}
