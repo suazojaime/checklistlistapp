@@ -58,6 +58,8 @@ const CheckilistList = (props)=>{
            }
            <div>algo</div>
            </div>
+
+           <div>jaime pull</div>
         </div>
     )
 
