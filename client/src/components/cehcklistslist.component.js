@@ -56,6 +56,7 @@ const CheckilistList = (props)=>{
             })
             :''
            }
+           <div>algo</div>
            </div>
         </div>
     )
