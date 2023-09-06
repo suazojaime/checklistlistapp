@@ -59,6 +59,7 @@ const CheckilistList = (props)=>{
            </div>
 
            <div>jaime pull 22222</div>
+           <div>Y cuando la junta Jorge?</div>
         </div>
     )
 
