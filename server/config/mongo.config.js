@@ -11,7 +11,7 @@ const db_name = "CheckLists"
 });
  */
 
-mongoose.connect(`mongodb://localhost:27017/${db_name}`, {
+mongoose.connect(`mongodb://127.0.0.1/${db_name}`, {
     useNewUrlParser: true, // Avoids deprecation warnings -> enables new MongoDB connection string parser
     useUnifiedTopology: true, // Avoids connection errors -> enables new unified topology engine for MongoDB Node.js driver
 }).then(() => {
