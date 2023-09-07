@@ -35,6 +35,18 @@ module.exports = {
             res.json(result)
         })
     },
+    listbyOwner : (req,res) => {
+        console.log('listingbyOwner!!! ' + req.params.id);
+        SiteModel.find({'owner':req.params.id})
+        .populate("owner")
+        .then((result)=>{
+            res.json(result)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            res.status(500).json({ error: 'An error occurred while fetching data.' });
+        })
+    },
     updateOne : (req,res) => {
         console.log(req.params)
         let id = req.params.id;

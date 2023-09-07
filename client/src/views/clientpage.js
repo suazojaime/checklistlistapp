@@ -25,6 +25,10 @@ const ClientPage = () => {
 
     const [clientid, setclientid] = useState('')
 
+    const [serverscheckToDelete,setserverscheckToDelete ] = useState('')
+    const [serversToDelete, setserversToDelete] = useState('')
+    const [siteToDelete, setsiteToDelete ] = useState('')
+
     useEffect(()=>{
         const instance = axios.create({baseURL: 'http://localhost:8000'})
         instance.get('/api/v2/company',{ withCredentials: true})
@@ -98,20 +102,72 @@ const ClientPage = () => {
         closeFloatingSite();
       };
 
-    const deleteclient = ()=>{
-        {/* <Popup position="right center">
-            <div>Popup content here !!</div>
-        </Popup> */}
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
-        try{
-            instance.delete('/api/v2/company/'+clientid,{ withCredentials: true})
-            .then(response => console.log(response))
-            window.location.reload();
+      const deleteclient = async () => {
+        const instance = axios.create({ baseURL: 'http://localhost:8000', withCredentials: true });
+      
+        try {
+          const response = await instance.get('api/v2/site/owner/' + clientid);
+          const siteData = response.data;
+      
+          // Set the values in a single batch to trigger state updates
+          const siteIdsToDelete = [];
+          const serverIdsToDelete = [];
+          const serverCheckIdsToDelete = [];
+      
+          for (const site of siteData) {
+            siteIdsToDelete.push(site._id);
+      
+            const serverResponse = await instance.get('api/v2/server/owner/' + site._id);
+            const serverData = serverResponse.data;
+      
+            for (const server of serverData) {
+              serverIdsToDelete.push(server._id);
+      
+              const serverCheckResponse = await instance.get('api/v2/servercheck/owner/' + server._id);
+              const serverCheckData = serverCheckResponse.data[0];
+      
+              if (serverCheckData) {
+                serverCheckIdsToDelete.push(serverCheckData._id);
+              }
+            }
+          }
+      
+          setsiteToDelete(siteIdsToDelete);
+          setserversToDelete(serverIdsToDelete);
+          setserverscheckToDelete(serverCheckIdsToDelete);
+      
+          // Use Promise.all to perform deletions concurrently
+          await Promise.all(
+            serverCheckIdsToDelete.map(async (serverCheckId) => {
+              await instance.delete('api/v2/servercheck/' + serverCheckId);
+              console.log('checklistDeleted');
+            })
+          );
+      
+          await Promise.all(
+            serverIdsToDelete.map(async (serverId) => {
+              await instance.delete('api/v2/server/' + serverId);
+              console.log('ServerDeleted');
+            })
+          );
+      
+          await Promise.all(
+            siteIdsToDelete.map(async (siteId) => {
+              await instance.delete('api/v2/site/' + siteId);
+              console.log('SiteDeleted');
+            })
+          );
+
+          await instance.delete('api/v2/company/' + clientid);
+      
+          // Navigate after all deletions are complete
+          navigate('/clients');
+        } catch (error) {
+          console.log(error);
         }
-        catch(error){console.log(error)}
-        
-    }
-    
+      };
+      
+
     return(
         
         <div > 

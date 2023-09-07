@@ -8,7 +8,7 @@ const ChecklistDetails = (props)=>{
 
     if(ServerCategory === 'DBServer'){
         return(
-            <DbChecklist checklist = {checklists[0]} />
+            <DbChecklist checklist = {checklists[0]}  />
         )
     }else{
         return(

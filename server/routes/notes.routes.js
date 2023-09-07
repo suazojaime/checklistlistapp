@@ -22,10 +22,11 @@ const app = express.Router();
     app.post('/v2/company/:id', authenticate,CompanyController.updateOne)
     app.delete('/v2/company/:id',authenticate, CompanyController.deleteOne)
 
-  
+
     app.post('/v2/site/',authenticate, SiteController.create)
     app.get('/v2/site/',authenticate, SiteController.listAll)
     app.get('/v2/site/:id',authenticate, SiteController.listOne)
+    app.get('/v2/site/owner/:id',authenticate, SiteController.listbyOwner)
     app.post('/v2/site/:id',authenticate, SiteController.updateOne)
     app.delete('/v2/site/:id',authenticate, SiteController.deleteOne)
 
