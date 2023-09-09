@@ -7,7 +7,7 @@ module.exports = {
         console.log('creating!!!')
         SiteModel.create(req.body)
         .then((newElement) => SiteModel.findById({_id: newElement._id}).populate('owner'))
-        .then(() => res.status(201).json({ok:"ok"}))
+        .then((result) => res.status(201).json(result))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError){
                 let keys = Object.keys(error.errors);

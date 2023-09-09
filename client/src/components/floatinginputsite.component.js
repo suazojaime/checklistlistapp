@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
-const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid }) => {
+const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid, handleonconfirm }) => {
   const [siteName, setsiteName] = useState('')
   const [acronym, setacronym] = useState('')
   const [country, setcountry] = useState('')
@@ -20,17 +20,20 @@ const handleConfirm = () => {
         owner: ownerid,
         summary : summary,
     })
-    .then((response)=>{/* console.log(response) */
-        setpleaserender(pleaserender+1)
-        onConfirm(siteName);
-        setsiteName("");
-        setacronym("");
-        setcountry("");
-        setsummary("");
-        onClose();
-      }).catch((error) => updateErrorMessages(error))
+    .then((response)=>{console.log(response)
+      handleonconfirm(response.data);
+      setpleaserender(pleaserender+1)
+      onConfirm(siteName);
+  setsiteName("");
+  setacronym("");
+  setcountry("");
+  setsummary("");
+  onClose();
     
-    /* window.location.reload(); */
+    }).catch((error) => updateErrorMessages(error))
+  
+  
+  // window.location.reload();
 
   };
 
@@ -54,6 +57,7 @@ const handleConfirm = () => {
 
 
   return (
+    
     <div className="floating-input-container">
       <div>
       <input

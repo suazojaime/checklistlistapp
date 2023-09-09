@@ -5,19 +5,11 @@ import { useNavigate } from "react-router-dom"
 
 
 const ServerCards = (props) => {
-    const {siteid, site} = props
+    const {servers} = props
     const navigate = useNavigate('')
  
 
-    const [servers, setservers] = useState('')
- 
-
-    useEffect(()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
-        instance.get('/api/v2/server/owner/'+siteid,{ withCredentials: true})
-        .then(response =>  setservers(response.data))
-        console.log(servers)
-    },[])
+    
 
     return(
         <div className="serverWrapper">

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
-const FloatingServerInput = ({ onClose, onConfirm, owner}) => {
+const FloatingServerInput = ({ onClose, onConfirm, owner,handleonconfirm}) => {
   const [Application, setApplication] = useState('')
   const [hostname, sethostname] = useState('')
   const [IP, setIP] = useState('')
@@ -21,15 +21,17 @@ const handleConfirm = () => {
       owner: owner.id
       
     })
-    .then((response)=>{console.log(response)
+    .then((response)=>{console.log(response.data)
+      handleonconfirm(response.data);
       onConfirm(Application);
     setApplication("");
     sethostname("");
     setIP("");
     onClose();
-    /* window.location.reload(); */
+
         }).catch((error) => updateErrorMessages(error))
     
+
 
   };
 

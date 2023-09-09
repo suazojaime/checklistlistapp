@@ -6,7 +6,7 @@ module.exports = {
     create : (req,res) => {
         console.log('creating!!!')
         ClientModel.create(req.body)
-        .then(()=>res.json({ok:'ok'}))
+        .then((result)=>res.json(result))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError){
                 let keys = Object.keys(error.errors);
