@@ -44,7 +44,7 @@ const app = express.Router();
     app.post('/v2/servercheck/:id',authenticate, ServerchecklistController.updateOne)
     app.delete('/v2/servercheck/:id',authenticate, ServerchecklistController.deleteOne)
     
-    app.post('/image/v3/upload', upload.single('image'),ImageController.create)
+    app.post('/image/v3/upload', upload.single('image'),ImageController.upload)
 
 /* } */
 

@@ -55,6 +55,7 @@ module.exports = {
                 const userInfo = {
                   _id: user._id,
                   email: user.email,
+                  role: user.role,
                 };
                 console.log("userInfo: ", userInfo);
                 const userToken = jwt.sign(userInfo, process.env.JWT_SECRET);

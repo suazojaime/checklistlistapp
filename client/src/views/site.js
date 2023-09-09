@@ -4,10 +4,12 @@ import FloatingServerInput from "../components/floatingserverinput.component";
 import { useState,useEffect } from "react";
 import axios from "axios";
 
-const SitePage = ()=>{
+const SitePage = (props)=>{
     const n = useParams()
     const a = useLocation()
     const navigate = useNavigate()
+
+    console.log(props.user.role)
 
     const [serverscheckToDelete,setserverscheckToDelete ] = useState('')
     const [serversToDelete, setserversToDelete] = useState('')
@@ -27,8 +29,11 @@ const SitePage = ()=>{
     },[])
 
     /* console.log(n)
-    console.log(a.state) */
+    console.log(a) */
     const sitedata = a.state
+
+   /*  console.log(a.state.role) */
+
     const [FloatingServer, setFloatingServer] = useState('')
     const [inputserver, setinputserver] = useState('')
 
@@ -126,10 +131,15 @@ const SitePage = ()=>{
                     <div>Add server</div>
                 </div>
 
+
+                {props.user.role==='admin'?(
+
                 <div className="Addclientwrapper">
                     <div className="removeclientbutton" onClick={()=>deletesite()}>+</div>
                     <div>Remove site</div>
                 </div>
+
+                ):null}
             </div>
             {FloatingServer && (
             <FloatingServerInput 

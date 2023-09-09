@@ -17,6 +17,7 @@ const UserForm = (props) => {
     email: "",
     password: "",
     confirmPassword: "",
+    role:""
   });
   const [errorMessages, setErrorMessages] = useState({});
 
@@ -67,6 +68,7 @@ const UserForm = (props) => {
         email: "",
         password: "",
         confirmPassword: "",
+        role:"",
       });
       // c) Login User
       loginUser();
@@ -161,6 +163,8 @@ const UserForm = (props) => {
           </div>
         </div>
 
+       
+
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
           <div className="mb-2 row text-end">
@@ -187,6 +191,31 @@ const UserForm = (props) => {
           </div>
         )}
 
+
+        {formType === "register" && (
+                <div className="mb-2 row text-end">
+                  <label htmlFor="role" className="col-sm-3 col-form-label">
+                    Role:
+                  </label>
+                  <div className="col-sm-7">
+                    <input
+                      type="text"
+                      id="role"
+                      name="role"
+                      placeholder="Choose Role"
+                      onChange={handleOnChangeUserFields}
+                      value={userCredentials?.role}
+                      className="form-control"
+                    />
+                    <div className="text-danger small text-start">
+                      {errorMessages?.password}
+                    </div>
+                    <div className="text-danger small text-start">
+                      {errorMessages?.login}
+                    </div>
+                  </div>
+                </div>)}
+
         {/* V) Submit Button */}
         <div className="text-center">
           <button type="submit" className="mt-2 px-4 btn btn-sm btn-primary">
@@ -197,6 +226,8 @@ const UserForm = (props) => {
             )}
           </button>
         </div>
+
+        
       </form>
     </div>
   );
