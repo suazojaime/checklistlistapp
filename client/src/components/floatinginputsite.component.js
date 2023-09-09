@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid }) => {
+const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid, handleonconfirm }) => {
   const [siteName, setsiteName] = useState('')
   const [acronym, setacronym] = useState('')
   const [country, setcountry] = useState('')
@@ -18,6 +18,7 @@ const handleConfirm = () => {
         summary : summary,
     })
     .then((response)=>{console.log(response)
+        handleonconfirm(response.data);
         setpleaserender(pleaserender+1)}).catch((error) => console.log(error))
     onConfirm(siteName);
     setsiteName("");
@@ -25,7 +26,8 @@ const handleConfirm = () => {
     setcountry("");
     setsummary("");
     onClose();
-    window.location.reload();
+    
+    // window.location.reload();
 
   };
 
@@ -39,6 +41,7 @@ const handleConfirm = () => {
 
 
   return (
+    
     <div className="floating-input-container">
       <input
         type="text"

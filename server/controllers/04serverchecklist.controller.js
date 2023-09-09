@@ -5,7 +5,7 @@ const {ObjectId} = mongoose.Types;
 module.exports = {
     create : (req,res) => {
         console.log('creating!!!')
-        ServerCheckListModel.create(req.body).then(()=>res.json({ok:'ok'}))
+        ServerCheckListModel.create(req.body).then((result)=>res.json(result))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError){
                 let keys = Object.keys(error.errors);

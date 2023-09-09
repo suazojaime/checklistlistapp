@@ -50,8 +50,9 @@ const ClientPage = () => {
         if(sites){
         const filteredObjects = sites.filter(obj => obj.owner._id === props);
         /* console.log(filteredObjects) */
-        setfileteredsites(filteredObjects)
-        setclientid(props)
+        setclientid(props,()=>{setfileteredsites(filteredObjects)})
+        
+        
         return('')}
         else{return('')}
     }
@@ -102,6 +103,25 @@ const ClientPage = () => {
         closeFloatingSite();
       };
 
+      const removeFromDomClient = clientid => {
+        setclients(clients.filter(clients => clients._id !== clientid));
+        setclientid(null);
+        }
+        
+        //to remove sites from dom
+        const removeFromDomSites = sitesid => {
+            setfileteredsites(fileteredsites.filter(fileteredsites => fileteredsites._id !== sitesid));
+            setclientid(null);
+            }
+
+        const handleonconfirm=(newsite)=>{
+          const newfileteredsites =[...fileteredsites];
+          newfileteredsites.push(newsite);
+          setfileteredsites(newfileteredsites);
+          // console.log(fileteredsites, "fileteredsites")
+        }
+
+
       const deleteclient = async () => {
         const instance = axios.create({ baseURL: 'http://localhost:8000', withCredentials: true });
       
@@ -113,12 +133,16 @@ const ClientPage = () => {
           const siteIdsToDelete = [];
           const serverIdsToDelete = [];
           const serverCheckIdsToDelete = [];
+
+          removeFromDomClient(clientid);
       
           for (const site of siteData) {
             siteIdsToDelete.push(site._id);
       
             const serverResponse = await instance.get('api/v2/server/owner/' + site._id);
             const serverData = serverResponse.data;
+            
+            removeFromDomSites(site._id); //to remove sites from dom
       
             for (const server of serverData) {
               serverIdsToDelete.push(server._id);
@@ -159,7 +183,7 @@ const ClientPage = () => {
           );
 
           await instance.delete('api/v2/company/' + clientid);
-      
+            
           // Navigate after all deletions are complete
           navigate('/clients');
         } catch (error) {
@@ -212,7 +236,7 @@ const ClientPage = () => {
                      )}
 
             </div>  
-
+            {clientid ?
             <div className="clientsDetails">
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
@@ -235,6 +259,7 @@ const ClientPage = () => {
                 
                 {isFloatingSite && (
                     <FloatingInputSite
+                    handleonconfirm={handleonconfirm}
                     onClose={closeFloatingSite}
                     onConfirm={handleSiteConfirm}
                     pleaserender={pleaserender}
@@ -251,8 +276,8 @@ const ClientPage = () => {
                         </div>
                         <div>Drop Client and all Sites</div>
                     </div>    
-                </div>         
-            </div>
+                </div>   
+            </div>: null      }
 
 
 

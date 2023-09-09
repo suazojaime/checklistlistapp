@@ -7,7 +7,7 @@ module.exports = {
         console.log('creating!!!')
         ServerModel.create(req.body)
         .then((newElement) => ServerModel.findById({_id: newElement._id}).populate('owner'))
-        .then(() => res.json({ok:'ok'}))
+        .then((result) => res.json(result))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError){
                 let keys = Object.keys(error.errors);

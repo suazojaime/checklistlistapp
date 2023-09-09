@@ -1,7 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ServerCards from "../components/serverCards.component";
 import FloatingServerInput from "../components/floatingserverinput.component";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 
 const SitePage = ()=>{
@@ -16,12 +16,19 @@ const SitePage = ()=>{
 
     /* console.log("n  : " +n.id) */
 
+    const [servers, setservers] = useState("")
+ 
 
+    useEffect(()=>{
+        const instance = axios.create({baseURL: 'http://localhost:8000'})
+        instance.get('/api/v2/server/owner/'+sitedata._id,{ withCredentials: true})
+        .then(response =>  setservers(response.data))
+        console.log(servers)
+    },[])
 
     /* console.log(n)
     console.log(a.state) */
     const sitedata = a.state
-
     const [FloatingServer, setFloatingServer] = useState('')
     const [inputserver, setinputserver] = useState('')
 
@@ -41,6 +48,14 @@ const SitePage = ()=>{
         console.log("Input Value:", value);
         closeFloatingServer();
       };
+
+
+       const handleonconfirm=(newserver)=>{
+         const newservers =[...servers];
+         newservers.push(newserver);
+         setservers(newservers);
+        //  console.log(servers, "servers")
+       }
 
       const deletesite = async () => {
         const instance = axios.create({ baseURL: 'http://localhost:8000', withCredentials: true });
@@ -118,6 +133,7 @@ const SitePage = ()=>{
             </div>
             {FloatingServer && (
             <FloatingServerInput 
+            handleonconfirm={handleonconfirm}
             onClose={closeFloatingServer}
             onConfirm={handleServer}
             owner={n}
@@ -127,7 +143,7 @@ const SitePage = ()=>{
                 {sitedata.summary}
             </div>
 
-            <ServerCards siteid = {sitedata._id} sitedata={sitedata}/>
+            <ServerCards  servers={servers}/>
         </div>
         </div>
     )
