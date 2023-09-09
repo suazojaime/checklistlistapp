@@ -10,7 +10,11 @@ import Popup from 'reactjs-popup';
 
 import PageTemplate from "../template/PageTemplate";
 
-const ClientPage = () => {
+const ClientPage = (props) => {
+
+    console.log(props)
+    const {_id, email, role} = props.user
+    console.log(role)
 
     const [clients, setclients] = useState('')
     const [sites, setsites] = useState('')
@@ -18,22 +22,25 @@ const ClientPage = () => {
     const navigate =  useNavigate()
     const [pleaserender, setpleaserender] = useState(0)
 
+
     const [isFloatingInputOpen, setIsFloatingInputOpen] = useState(false); // State to control the visibility of the floating input
-    const [inputValue, setInputValue] = useState(""); // State to store the input value
-
+    
     const [isFloatingSite, setisFloatingSite] = useState(false); // State to control the visibility of the floating input
-    const [inputsite, setinputsite] = useState(""); // State to store the input value
-
+    
     const [clientid, setclientid] = useState('')
 
-    const [serverscheckToDelete,setserverscheckToDelete ] = useState('')
-    const [serversToDelete, setserversToDelete] = useState('')
-    const [siteToDelete, setsiteToDelete ] = useState('')
+
+    const [clientsfiltered, setclientsfiltered] = useState('')
+
+    const[barra,setBarra] = useState('')
 
     useEffect(()=>{
         const instance = axios.create({baseURL: 'http://localhost:8000'})
         instance.get('/api/v2/company',{ withCredentials: true})
-        .then(response =>  setclients(response.data))
+        .then(response =>  {
+          setclients(response.data)
+          setclientsfiltered(response.data)
+        })
     },[pleaserender])
 
    useEffect(()=>{
@@ -54,6 +61,7 @@ const ClientPage = () => {
         // setclientid(props,()=>{setfileteredsites(filteredObjects)})
         setfileteredsites(filteredObjects)
         
+        
         return('')}
         else{return('')}
     }
@@ -69,7 +77,7 @@ const ClientPage = () => {
       const closeFloatingInput = () => {
         // Close the floating input and clear input value
         setIsFloatingInputOpen(false);
-        setInputValue("");
+        /* setInputValue(""); */
       };
     
       const handleInputConfirm = (value) => {
@@ -88,7 +96,7 @@ const ClientPage = () => {
       const closeFloatingSite = () => {
         // Close the floating input and clear input value
         setisFloatingSite(false);
-        setinputsite("");
+        /* setinputsite(""); */
       };
     
       const handleSiteConfirm = (value) => {
@@ -99,6 +107,7 @@ const ClientPage = () => {
 
       const removeFromDomClient = clientid => {
         setclients(clients.filter(clients => clients._id !== clientid));
+        setclientsfiltered(clientsfiltered.filter(clients => clients._id !== clientid));
         setclientid(null);
         }
         
@@ -150,9 +159,9 @@ const ClientPage = () => {
             }
           }
       
-          setsiteToDelete(siteIdsToDelete);
+          /* setsiteToDelete(siteIdsToDelete);
           setserversToDelete(serverIdsToDelete);
-          setserverscheckToDelete(serverCheckIdsToDelete);
+          setserverscheckToDelete(serverCheckIdsToDelete); */
       
           // Use Promise.all to perform deletions concurrently
           await Promise.all(
@@ -184,34 +193,46 @@ const ClientPage = () => {
           console.log(error);
         }
       };
+
+
+      const filteredClients = (e) =>{
+        const clientes_filtered = clients.filter(item=>{
+          return item.company.includes(e.target.value) 
+        })
+        console.log(clientes_filtered)
+        setclientsfiltered(clientes_filtered) 
+      }
       
+
 
     return(
         
         <div > 
-          <PageTemplate  title="Clients" isclient={true}>
-            
+<PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients}>
+
 
             <div className="clientsBody bigdiv" >
 
             <div className="clientsList">
 
-            {Object.keys(clients).map((item, idx) => {
+            {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
                     <div key={`div ${idx}`} className="clientWrapper"
-                    onMouseEnter={()=>getClientDetails(clients[item]._id)}>
+                    onMouseEnter={()=>getClientDetails(clientsfiltered[item]._id)}>
                         <span key={`span ${idx}`} className="clients">
-                            {clients[item].company}
+                            {clientsfiltered[item].company}
                         </span>
                     </div>
                 )})}
 
+                {role==='admin'?(
                 <div className="Addclientwrapper">
                     <div className="addclienbutton" onClick={()=>addclient()}>
                         <div>+</div>                        
                     </div>
                     <div>Add Client</div>
                 </div>
+                ):null}
 
                 {isFloatingInputOpen && (
                     <FloatingInput
@@ -234,8 +255,9 @@ const ClientPage = () => {
                         )
                     })
                 } */}
-                <SiteCard fileteredsites={fileteredsites}/>   
-
+                <SiteCard fileteredsites={fileteredsites} user={props}/>   
+                
+                {role==='admin'?(
                 <div className="twobuttonswrapper">
                     <div className="Addclientwrapper">
                         <div className="addclienbutton" onClick={()=>addsite()}>
@@ -264,6 +286,8 @@ const ClientPage = () => {
                         <div>Drop Client and all Sites</div>
                     </div>    
                 </div>   
+                ):null}
+
             </div>: null      }
 
 

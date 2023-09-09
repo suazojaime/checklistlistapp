@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const PageTemplate = (props) => {
-
+    const {filteredClients} = props
     const navigate =  useNavigate();
     const [afuera,setAfuera]=useState(false);
 
@@ -30,7 +30,6 @@ const PageTemplate = (props) => {
 
 
 
-
     return (
         <div>
             <Navbar  bg="dark" data-bs-theme="dark" >
@@ -46,6 +45,7 @@ const PageTemplate = (props) => {
                                     type="text"
                                     placeholder="Search"
                                     className=" mr-sm-2"
+                                    onChange={(e) => filteredClients(e)}
                                     />
                                 </Col>
                                 <Col xs="auto">

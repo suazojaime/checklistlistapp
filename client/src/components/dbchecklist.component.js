@@ -10,6 +10,7 @@ const DbChecklist = (props) =>{
     const {checklist} = props
     const navigate = useNavigate()
     console.log(checklist)
+    const [imageFile, setImageFile] = useState(null);
 
     const [checklistresults , setchecklistresults] = useState({
         DriveSpace:false,
@@ -128,6 +129,7 @@ const DbChecklist = (props) =>{
 const submitchanges = ()=>{
     console.log('updagting!!!!')
     console.log(checklistresults)
+    console.log(checklistresults)
     const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
     
     try{
@@ -174,36 +176,62 @@ const deleteserver = ()=>{
     }
 }
 
+const handleImageUpload = (e) => {
+  const file = e.target.files[0];  
+  if (file) {
+    // You can perform any additional checks/validation here if needed
+    setImageFile(file);
+  }
+};
 
 
+ // Function to submit the uploaded image to the server
+ const submitImageToServer = (e) => {
+  console.log(e)
+  const imageName=e.target.name
+  if (imageFile) {
 
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          // Create a new FormData object
-          const formData = new FormData();
-          formData.append("image", file);
-          console.log(file)
-          console.log(formData)
-        
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Add 1 to month (0-based) and pad with '0' if needed
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const hours = String(currentDate.getHours()).padStart(2, '0');
+    const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+    const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+    const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
     
-          // Send a POST request to your server to handle the file upload
-          // Replace 'your_upload_endpoint' with your server's API endpoint
-          /* fetch("http://localhost:8000/api/image/v3/upload", {
-            method: "POST",
-            body: formData,
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              // Handle the server's response if needed
-              console.log("File uploaded successfully:", data);
-            })
-            .catch((error) => {
-              // Handle errors
-              console.error("Error uploading file:", error);
-            }); */
+    
+    const fileExtension = imageFile.name.split('.').pop(); // Get the file extension
+    const newImageName = `${serverid.id}_${formattedDate}_${imageName}.${fileExtension}`;
+
+    const formData = new FormData();
+    formData.append('image', imageFile, newImageName);
+    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    instance.post('/api/image/v3/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+    )
+      .then((response) => {
+        // Handle the server response here
+        console.log(response)
+        if (response.statusText === 'Ok') {
+          // Image upload successful
+          console.log('Image uploaded successfully');
+          // You can reset the imageFile state if needed
+          setImageFile(null);
+        } else {
+          // Handle the error case
+          console.error('Image upload failed');
         }
-      };
+      })
+      .catch((error) => {
+        console.error('Image upload error:', error);
+      });
+  }
+};
     
     return(
         checklistresults?
@@ -215,7 +243,10 @@ const deleteserver = ()=>{
             checked={checklistresults.DriveSpace}
             name='DriveSpace'
             onChange={(e)=>handleDriveSpaceChange(e)}/>     
-            <input type="file" accept="image/*" className="checklistfile" onChange={(e) => handleImageUpload(e)}/>               
+            <input type="file" accept="image/*" className="checklistfile" onChange={(e) => handleImageUpload(e)}/>  
+             {/* Add a button to trigger image upload */}
+              <button name='DriveSpace'  onClick={(e) => submitImageToServer(e)}>Upload Image</button>
+              {/* ... rest of your JSX code ... */}             
             </div>
 
             <div className="checklistwrapper"  >
