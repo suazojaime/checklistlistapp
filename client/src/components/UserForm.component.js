@@ -111,17 +111,17 @@ const UserForm = (props) => {
   // III) JSX
   // --------------------------------------------------
   return (
-    <div className="py-3">
-      <h3 className="text-center">
+    <div >
+      <h3 >
         {formType === "register" ? <span>Register</span> : <span>Login</span>}
       </h3>
-      <form onSubmit={handleOnSubmitRegistration} className="my-3">
+      <form onSubmit={handleOnSubmitRegistration} >
         {/* II) Email Field */}
-        <div className="mb-2 row text-end">
-          <label htmlFor="email" className="col-sm-3 col-form-label">
+        <div >
+          <label htmlFor="email" >
             Email:
           </label>
-          <div className="col-sm-7">
+          <div >
             <input
               type="email"
               id="email"
@@ -129,17 +129,17 @@ const UserForm = (props) => {
               placeholder="john.doe@example.com"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.email}
-              className="form-control"
+              
             />
-            <div className="text-danger small text-start">
+            <div >
               {errorMessages?.email}
             </div>
           </div>
         </div>
 
         {/* III) Password Field */}
-        <div className="mb-2 row text-end">
-          <label htmlFor="password" className="col-sm-3 col-form-label">
+        <div >
+          <label htmlFor="password" >
             Password:
           </label>
           <div className="col-sm-7">
@@ -150,12 +150,12 @@ const UserForm = (props) => {
               placeholder="********"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.password}
-              className="form-control"
+              
             />
-            <div className="text-danger small text-start">
+            <div >
               {errorMessages?.password}
             </div>
-            <div className="text-danger small text-start">
+            <div >
               {errorMessages?.login}
             </div>
           </div>
@@ -163,14 +163,14 @@ const UserForm = (props) => {
 
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
-          <div className="mb-2 row text-end">
+          <div >
             <label
               htmlFor="confirmPassword"
-              className="col-sm-3 col-form-label"
+              
             >
               Confirm Password:
             </label>
-            <div className="col-sm-7">
+            <div >
               <input
                 type="password"
                 id="confirmPassword"
@@ -178,9 +178,9 @@ const UserForm = (props) => {
                 placeholder="********"
                 onChange={handleOnChangeUserFields}
                 value={userCredentials?.confirmPassword}
-                className="form-control"
+                
               />
-              <div className="text-danger small text-start">
+              <div >
                 {errorMessages?.confirmPassword}
               </div>
             </div>
@@ -188,8 +188,8 @@ const UserForm = (props) => {
         )}
 
         {/* V) Submit Button */}
-        <div className="text-center">
-          <button type="submit" className="mt-2 px-4 btn btn-sm btn-primary">
+        <div >
+          <button type="submit" >
             {formType === "register" ? (
               <span>Register</span>
             ) : (

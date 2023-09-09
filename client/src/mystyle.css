@@ -185,16 +185,16 @@
     padding-right: 50px; */
     padding: 60px;
     /* position: relative; */
-    transform: skewX(-30deg);
+    /* transform: skewX(-30deg); */
     overflow: hidden; /* Hide overflowing skewed content */
     position: relative; /* Maintain position context for child elements */
     border-radius: 10px;
 }
 
 .register > * {
-    transform: skewX(30deg); /* Counter-tilt child elements */
+    /* transform: skewX(30deg); Counter-tilt child elements */
     display: inline-block;
-    transform-origin: top right;
+    /* transform-origin: top right; */
     padding-left: 3px; /* Adjust this value as needed */
 }
 
@@ -210,16 +210,16 @@
     padding-right: 50px; */
     padding: 60px;
     /* position: relative; */
-    transform: skewX(-30deg);
+    /* transform: skewX(-30deg); */
     overflow: hidden; /* Hide overflowing skewed content */
     position: relative; /* Maintain position context for child elements */
     border-radius: 10px;
 }
 
 .login > * {
-    transform: skewX(30deg); /* Counter-tilt child elements */
+    /* transform: skewX(30deg); Counter-tilt child elements */
     display: inline-block;
-    transform-origin: top right;
+    /* transform-origin: top right; */
     padding-left: 3px; /* Adjust this value as needed */
 }
 

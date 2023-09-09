@@ -8,6 +8,7 @@ import FloatingInput from "../components/floatinginputclient.component";
 import FloatingInputSite from "../components/floatinginputsite.component";
 import Popup from 'reactjs-popup';
 
+import PageTemplate from "../template/PageTemplate";
 
 const ClientPage = () => {
 
@@ -45,26 +46,19 @@ const ClientPage = () => {
 
     const getClientDetails = (props) => {
         /* console.log(props) */
-        
+        setclientid(props)
         
         if(sites){
         const filteredObjects = sites.filter(obj => obj.owner._id === props);
         /* console.log(filteredObjects) */
-        setclientid(props,()=>{setfileteredsites(filteredObjects)})
-        
+        // setclientid(props,()=>{setfileteredsites(filteredObjects)})
+        setfileteredsites(filteredObjects)
         
         return('')}
         else{return('')}
     }
 
-    const logout = ()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
-        instance.get('/user/logout',{ withCredentials: true})
-        .then(response =>  {console.log(response)
-        navigate('/login')})
-        .catch((error) => console.log('error'))
-        
-    }
+
 
 
     const addclient = () => {
@@ -195,15 +189,8 @@ const ClientPage = () => {
     return(
         
         <div > 
-
-            <div className="searchBar ">
-                <div className="searchbarcontainer">
-                
-                    <label className="clientsBar" ><h2>Clients</h2> </label>
-                    <input type='text'></input>
-                    <div className="logout" onClick={logout}>LogOut</div>
-                </div>
-            </div>
+          <PageTemplate  title="Clients" isclient={true}>
+            
 
             <div className="clientsBody bigdiv" >
 
@@ -282,6 +269,7 @@ const ClientPage = () => {
 
 
             </div>
+            </PageTemplate>
         </div>
 
         )

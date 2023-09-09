@@ -5,6 +5,8 @@ import { useLocation, useParams } from "react-router-dom"
 import ChecklistDetails from "../components/checklistdetails.component";
 import axios, { Axios } from "axios";
 
+import PageTemplate from '../template/PageTemplate';
+
 const ServerView = (props) =>{
     const serverid = useParams()
     const site = useLocation()
@@ -18,12 +20,17 @@ const ServerView = (props) =>{
     },[])
 
     return(
-        <div className="bigdiv">
-            <div><h1>{site.state.Application}</h1></div>
-           {/*  <CheckilistList checklists={checklists} /> */}
-            <ChecklistDetails checklists={checklists} ServerCategory={site.state.Application}/>
+        <div>
+            <PageTemplate  title={site.state.Application} isclient={false}>
+                <div className="bigdiv">
+                    
+                    <div><h1>{site.state.Application}</h1></div>
+                {/*  <CheckilistList checklists={checklists} /> */}
+                    <ChecklistDetails checklists={checklists} ServerCategory={site.state.Application}/>
+                    
+                </div>
+            </PageTemplate>
         </div>
-
     )
 
 }

@@ -4,6 +4,8 @@ import FloatingServerInput from "../components/floatingserverinput.component";
 import { useState,useEffect } from "react";
 import axios from "axios";
 
+import PageTemplate from '../template/PageTemplate';
+
 const SitePage = ()=>{
     const n = useParams()
     const a = useLocation()
@@ -115,9 +117,7 @@ const SitePage = ()=>{
 
     return(
         <div>
-            <div className="logregbanner clientsBar">
-                {sitedata.siteName}
-            </div>
+          <PageTemplate  title={sitedata.siteName} isclient={false}>
 
         <div className="bigdiv">
             <div className="ServerButtonsWrapper">
@@ -145,6 +145,7 @@ const SitePage = ()=>{
 
             <ServerCards  servers={servers}/>
         </div>
+        </PageTemplate>
         </div>
     )
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import UserForm from '../components/UserForm.component'
 import bannerImage from '../images/banner_bg.jpg'; 
 
+import PageTemplate from '../template/PageTemplate';
+
 const LogRegPage = (props) => {
 
   // --------------------------------------------------
@@ -16,23 +18,19 @@ const LogRegPage = (props) => {
   // --------------------------------------------------
   return (
     <div >
-
-        <div className='logregbanner'>
-            <h1>Welcome to the future of checklists</h1>
-
-        </div>
-     
-     <div className="bigdiv">
-        <div className = "logreqwrapper">
-            <div className = "register">
-            <UserForm formType={"register"} setUser={setUser} />
-            </div>
-            <div className = "login">
-            <UserForm formType={"login"} setUser={setUser} />
-            </div>
-        </div>
-    </div>
-
+      <PageTemplate  title="Welcome to the future of checklists" isclient={false}>
+      
+      <div className="bigdiv">
+          <div className = "logreqwrapper">
+              <div className = "register">
+              <UserForm formType={"register"} setUser={setUser} />
+              </div>
+              <div className = "login">
+              <UserForm formType={"login"} setUser={setUser} />
+              </div>
+          </div>
+      </div>
+    </PageTemplate>
     </div>
   )
 }

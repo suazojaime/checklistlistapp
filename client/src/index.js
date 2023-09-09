@@ -9,6 +9,9 @@ import SitePage from './views/site';
 import ServerView from './views/server';
 import LogRegPage from './views/logreg.view';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const ProtectedRoute = (props) => {
