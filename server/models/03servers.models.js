@@ -4,7 +4,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 const ServerSchema = new mongoose.Schema({
     Application: {
         type: String,
-        required: [true, "The application that server its running"],
+        required: [true, "Application is required"],
         minLength: [2, "Min lenght of 2"],
         unique: false 
     },

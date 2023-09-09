@@ -13,7 +13,7 @@ const upload = multer({ storage: storage });
  */
 /* module.exports = (app)=>{ */
 
-const app = express.Router();
+const app = express.Router(); 
 
 
     app.post('/v2/company/',authenticate, CompanyController.create)

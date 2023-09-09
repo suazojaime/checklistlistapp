@@ -1,12 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import _ from "lodash";
 
 const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid }) => {
   const [siteName, setsiteName] = useState('')
   const [acronym, setacronym] = useState('')
   const [country, setcountry] = useState('')
   const [summary, setsummary] = useState('')
+
+const [errorMessages, setErrorMessages] = useState({});
 
 const handleConfirm = () => {
     const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
@@ -17,47 +20,80 @@ const handleConfirm = () => {
         owner: ownerid,
         summary : summary,
     })
-    .then((response)=>{console.log(response)
-        setpleaserender(pleaserender+1)}).catch((error) => console.log(error))
-    onConfirm(siteName);
-    setsiteName("");
-    setacronym("");
-    setcountry("");
-    setsummary("");
-    onClose();
-    window.location.reload();
+    .then((response)=>{/* console.log(response) */
+        setpleaserender(pleaserender+1)
+        onConfirm(siteName);
+        setsiteName("");
+        setacronym("");
+        setcountry("");
+        setsummary("");
+        onClose();
+      }).catch((error) => updateErrorMessages(error))
+    
+    /* window.location.reload(); */
 
   };
 
-  console.log(ownerid)
+  /* console.log(ownerid) */
 
   const filteredObjects = owner.filter(obj => obj._id === ownerid);
 
-  console.log(filteredObjects)
-  console.log(filteredObjects.company)
+ /*  console.log(filteredObjects)
+  console.log(filteredObjects.company) */
+
+  const updateErrorMessages = (err) => {
+    /* console.log(err) */
+    let errorMessagesToUpdate = {};
+    let errors = err.response;
+    /* console.log(errors) */
+    errorMessagesToUpdate = _.mapValues(errors, (error) => error.error);
+    setErrorMessages(errorMessagesToUpdate);
+    console.log(errorMessagesToUpdate)
+  };
 
 
 
   return (
     <div className="floating-input-container">
+      <div>
       <input
         type="text"
         placeholder="SiteName"
         value={siteName}
         onChange={(e)=>setsiteName(e.target.value)}
+        
       />
+      <div className="error">
+              {errorMessages?.data?.siteName}
+      </div>
+      </div>
+
+      <div>
       <input
         type="text"
         placeholder="Acronym"
         value={acronym}
         onChange={(e)=>setacronym(e.target.value)}
       />
+      <div className="error">
+              {errorMessages?.data?.acronym}
+      </div>
+      </div>
+
+      <div>
       <input
         type="text"
         placeholder="Country"
         value={country}
         onChange={(e)=>setcountry(e.target.value)}
       />
+      <div className="error">
+              {errorMessages?.data?.country}
+      </div>
+      </div>
+
+
+
       <input
         type="text"
         placeholder="Summary"

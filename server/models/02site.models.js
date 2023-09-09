@@ -4,15 +4,15 @@ var uniqueValidator = require('mongoose-unique-validator');
 const SiteSchema = new mongoose.Schema({
     siteName: {
         type: String,
-        required: [true, "Name of Site"],
+        required: [true, "Site name required"],
         minLength: [2, "Name of Site must have at least 2 characterss"],
         unique: true 
     },
     acronym: {
         type: String,
         required: [true, "three letter code"],
-        minLength: [3, "Product Name must have at least 2 characterss"],
-        maxLength: [3, "too much you crazy, the max its 255 characters"],
+        minLength: [3, "3 Characters"],
+        maxLength: [3, "3 Characters"],
         unique: true 
     },
     country: {

@@ -292,3 +292,9 @@
     margin-top: 30px;
 
 }
+
+
+.error{
+    color:red;
+    font-size: small;
+}
