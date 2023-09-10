@@ -40,16 +40,16 @@ const CheckilistList = (props)=>{
 
     
     return(
-        <div className="bigdiv">
+        <div className="container m-5 text-center">
             <div className="checklistcontainer">
            {
             DBchek?
             Object.keys(filteredData).map((item, idx) => { 
                 return(
-                    <div key={`div0 ${idx}`} className="checklistwrapper"  >
-                    <label key={`div1 ${idx}`} className="checklistlabel"> {item}</label>
-                    <input type="checkbox" className="checklistcheckbox" checked={checkboxValues[item]} onChange={() => handleCheckboxChange(item)}/>     
-                    <input type="file" accept="image/*" className="checklistfile"/>               
+                    <div key={`div0 ${idx}`} className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3"  >
+                    <label key={`div1 ${idx}`} className="col-3"> {item}</label>
+                    <input type="checkbox" className="col-3" checked={checkboxValues[item]} onChange={() => handleCheckboxChange(item)}/>     
+                    <input type="file" accept="image/*" className="col-3"/>               
                     </div>
 
                 )

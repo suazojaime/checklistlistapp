@@ -36,7 +36,7 @@ const PageTemplate = (props) => {
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center gap-5">
-                        <Navbar.Brand >{props.title}</Navbar.Brand>
+                        <Navbar.Brand className='fs-3' >{props.title}</Navbar.Brand>
                         {props.isclient?
                             <Form inline>
                                 <Row>

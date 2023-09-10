@@ -96,12 +96,17 @@
     background: radial-gradient(circle, rgba(255,236,177,1) 0%, rgba(241,184,62,0.8815165876777251) 92%);
 }
 
+/* w-75 h-50 mt-3 p-3 rounded-5 bg-warning */
+
 .serverWrapper{
     display:flex;
     justify-content: space-around;
     margin-top: 30px;
     gap:20px
 }
+
+
+
 .servercard{
     flex-wrap: wrap;
     width: 200px;
@@ -109,6 +114,7 @@
     background-color:  rgb(255,204,0);
     border-radius: 20px;
 }
+
 
 .ServerTitle{
     margin-top: 20px;
@@ -123,6 +129,8 @@
     border-radius: 5px;
     padding: 5px;
 }
+
+
 
 .checklistlabel{
     flex:1
@@ -254,6 +262,7 @@
 }
 
 
+
 .addclienbutton{
     background-color: black;
     color: white;
@@ -263,6 +272,8 @@
     justify-content: center;
     font-size: xx-large;
 }
+
+
 
 .addclienbutton:hover{
     cursor: pointer;

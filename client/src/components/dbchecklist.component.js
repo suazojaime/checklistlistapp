@@ -235,54 +235,54 @@ const handleImageUpload = (e) => {
     
     return(
         checklistresults?
-        <div className="bigdiv">
+        <div className="container m-5 text-center">
 
-            <div className="checklistwrapper"  >
-            <label  className="checklistlabel"> DriveSpace</label>
-            <input type="checkbox" className="checklistcheckbox" 
+            <div className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3"  >
+            <label  className="col-3"> DriveSpace</label>
+            <input type="checkbox" className="col-3" 
             checked={checklistresults.DriveSpace}
             name='DriveSpace'
             onChange={(e)=>handleDriveSpaceChange(e)}/>     
-            <input type="file" accept="image/*" className="checklistfile" onChange={(e) => handleImageUpload(e)}/>  
+            <input type="file" accept="image/*" className="col-3 me-5" onChange={(e) => handleImageUpload(e)}/>  
              {/* Add a button to trigger image upload */}
-              <button name='DriveSpace'  onClick={(e) => submitImageToServer(e)}>Upload Image</button>
+              <button name='DriveSpace' className="ms-5" onClick={(e) => submitImageToServer(e)}>Upload Image</button>
               {/* ... rest of your JSX code ... */}             
             </div>
 
-            <div className="checklistwrapper"  >
-            <label  className="checklistlabel"> DisableIPV6</label>
-            <input type="checkbox" className="checklistcheckbox" 
+            <div className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3"  >
+            <label  className="col-3"> DisableIPV6</label>
+            <input type="checkbox" className="col-3" 
             checked={checklistresults.DisableIPV6}
             name='DisableIPV6'
             onChange={(e)=>handleDisableIPV6Change(e)}/> 
-            <div className="checklistfile" ></div>           
+            <div className="col-3" ></div>           
             </div>
 
-            <div className="checklistwrapper"  >
-            <label  className="checklistlabel">VisualEffects</label>
-            <input type="checkbox" className="checklistcheckbox" 
+            <div className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3"  >
+            <label  className="col-3">VisualEffects</label>
+            <input type="checkbox" className="col-3" 
             checked={checklistresults?.BestPerformace?.VisualEffects}
             name='BestPerformace.VisualEffects'
             onChange={(e)=>handleVisualEffectsChange(e)}/>
-            <div className="checklistfile" ></div>        
+            <div className="col-3" ></div>        
             </div>
 
-            <div className="checklistwrapper"  >
-            <label  className="checklistlabel">BackgroundServices</label>
-            <input type="checkbox" className="checklistcheckbox" 
+            <div className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3"  >
+            <label  className="col-3">BackgroundServices</label>
+            <input type="checkbox" className="col-3" 
             checked={checklistresults?.BestPerformace?.BackgroundServices}
             name='BestPerformace.BackgroundServices'
             onChange={(e)=>handleBackgroundServicesChange(e)}/>
-            <div className="checklistfile" ></div>        
+            <div className="col-3" ></div>        
             </div>
 
-            <div className="ServerButtonsWrapper">
-                <div className="Addclientwrapper">
-                    <div className="addclienbutton" onClick={()=>submitchanges()}>+</div>
-                    <div>Update Cheklist</div>
+            <div className="container d-flex mt-5 justify-content-center gap-5">
+                <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>submitchanges()}>+</div>
+                    <div >Update Cheklist</div>
                 </div>
-                <div className="Addclientwrapper">
-                    <div className="removeclientbutton" onClick={()=>deleteserver()}>+</div>
+                <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>deleteserver()}>+</div>
                     <div>Delete Server</div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ const ServerView = (props) =>{
     return(
         <div>
             <PageTemplate  title={site.state.Application} isclient={false}>
-                <div className="bigdiv">
+                <div className="mx-5 mt-5 text-center">
                     
                     <div><h1>{site.state.Application}</h1></div>
                 {/*  <CheckilistList checklists={checklists} /> */}

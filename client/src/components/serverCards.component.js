@@ -12,17 +12,17 @@ const ServerCards = (props) => {
     
 
     return(
-        <div className="serverWrapper">
+        <div className="d-flex justify-content-around mt-5 gap-5">
         {
             
             servers?
             Object.keys(servers).map((item, idx)=>{
                 return(
 
-                    <div key={`div0 ${idx}`} className="servercard"
+                    <div key={`div0 ${idx}`} className="d-flex flex-wrap bg-warning border rounded-3 p-5 align-items-center"
                     onClick={() => navigate(`/site/server/${servers[item]._id}`, {state: servers[item]})}>
 
-                    <div key={idx} className="ServerTitle">{servers[item].Application}</div>
+                    <div key={idx} className="p-3 fs-3">{servers[item].Application}</div>
 
                     </div>
                 )

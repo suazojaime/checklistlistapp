@@ -53,7 +53,7 @@ const handleConfirm = () => {
   };
 
   return (
-    <div className="serverinput">
+    <div className="d-flex justify-content-around mt-3">
 
       <div>
       <input
@@ -63,7 +63,7 @@ const handleConfirm = () => {
         onChange={(e)=>setApplication(e.target.value)}
       />
 
-      <div className="error">
+      <div className="text-danger fs-6">
               {errorMessages?.data?.Application}
       </div>   
       </div>
@@ -75,7 +75,7 @@ const handleConfirm = () => {
         value={hostname}
         onChange={(e)=>sethostname(e.target.value)}
       />
-      <div className="error">
+      <div className="text-danger fs-6">
               {errorMessages?.data?.hostname}
       </div>  
       </div>
@@ -87,13 +87,13 @@ const handleConfirm = () => {
         value={IP}
         onChange={(e)=>setIP(e.target.value)}
       />
-      <div className="error">
+      <div className="text-danger fs-6">
               {errorMessages?.data?.IP}
       </div>
       </div>
 
       {/* <div>{filteredObjects[0].company}</div> */}
-      <button onClick={handleConfirm}>Confirm</button>
+      <button className="btn btn-secondary" onClick={handleConfirm}>Confirm</button>
     </div>
     
   );

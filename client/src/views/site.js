@@ -122,32 +122,32 @@ const SitePage = (props)=>{
         <div>
           <PageTemplate  title={sitedata.siteName} isclient={false}>
 
-        <div className="bigdiv">
-            <div className="ServerButtonsWrapper">
-                <div className="Addclientwrapper">
-                    <div className="addclienbutton" onClick={()=>addserver()}>+</div>
+        <div className="container m-5 text-center">
+            <div className="container d-flex mt-5 justify-content-center gap-5">
+                <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>addserver()}>+</div>
                     <div>Add server</div>
                 </div>
 
 
                 {props.user.role==='admin'?(
 
-                <div className="Addclientwrapper">
-                    <div className="removeclientbutton" onClick={()=>deletesite()}>+</div>
+                <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>deletesite()}>+</div>
                     <div>Remove site</div>
                 </div>
 
                 ):null}
             </div>
             {FloatingServer && (
-            <FloatingServerInput 
+            <FloatingServerInput
             handleonconfirm={handleonconfirm}
             onClose={closeFloatingServer}
             onConfirm={handleServer}
             owner={n}
             />
             )}
-            <div className="summary">
+            <div className="w-100  mt-5 p-5 rounded-3 bg-warning fs-3">
                 {sitedata.summary}
             </div>
 
