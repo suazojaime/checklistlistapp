@@ -1,0 +1,3 @@
+node_modules
+.DS_Store # This line only for Mac users
+.env

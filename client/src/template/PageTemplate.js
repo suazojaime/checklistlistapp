@@ -14,18 +14,23 @@ const PageTemplate = (props) => {
     const navigate =  useNavigate();
     const [afuera,setAfuera]=useState(false);
 
-    const logout =()=>{
+    const logout = () => {
         setAfuera(true);
-        if(afuera){
-            const instance = axios.create({baseURL: 'http://localhost:8000'})
-            instance.get('/user/logout',{ withCredentials: true})
-            .then(response =>  {console.log(response)
-            navigate('/login')
-            setAfuera(false)
+      };
+    
+      useEffect(() => {
+        if (afuera) {
+          const instance = axios.create({ baseURL: 'http://localhost:8000' });
+          instance
+            .get('/user/logout', { withCredentials: true })
+            .then((response) => {
+              console.log(response);
+              navigate('/login');
+              setAfuera(false);
             })
-            .catch((error) => console.log('error'))
+            .catch((error) => console.log('error'));
         }
-    }
+      }, [afuera]);
 
 
 

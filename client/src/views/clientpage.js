@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import FloatingInput from "../components/floatinginputclient.component";
 import FloatingInputSite from "../components/floatinginputsite.component";
 import Popup from 'reactjs-popup';
+import {baseUrl} from '../config.js'
 
 import PageTemplate from "../template/PageTemplate";
 
@@ -35,7 +36,7 @@ const ClientPage = (props) => {
     const[barra,setBarra] = useState('')
 
     useEffect(()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
+        const instance = axios.create({baseURL: baseUrl})
         instance.get('/api/v2/company',{ withCredentials: true})
         .then(response =>  {
           setclients(response.data)
@@ -44,7 +45,7 @@ const ClientPage = (props) => {
     },[pleaserender])
 
    useEffect(()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
+        const instance = axios.create({baseURL: baseUrl})
         instance.get('/api/v2/site',{ withCredentials: true})
         .then(response =>  setsites(response.data))
         .catch((error) => console.log('error'))
@@ -126,7 +127,7 @@ const ClientPage = (props) => {
 
 
       const deleteclient = async () => {
-        const instance = axios.create({ baseURL: 'http://localhost:8000', withCredentials: true });
+        const instance = axios.create({ baseURL: baseUrl, withCredentials: true });
       
         try {
           const response = await instance.get('api/v2/site/owner/' + clientid);
@@ -213,16 +214,20 @@ const ClientPage = (props) => {
 
             <div className="clientsBody bigdiv" >
 
-            <div className="clientsList">
+            <ul className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark nav nav-pills nav-fill gap-3">
 
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
-                    <div key={`div ${idx}`} className="clientWrapper"
+                 
+                    <li class="nav-item">
+                    <div key={`div ${idx}`} className="nav-link active"
                     onMouseEnter={()=>getClientDetails(clientsfiltered[item]._id)}>
-                        <span key={`span ${idx}`} className="clients">
+                        <span key={`span ${idx}`} className="nav-item active">
                             {clientsfiltered[item].company}
                         </span>
                     </div>
+                    </li>
+                  
                 )})}
 
                 {role==='admin'?(
@@ -243,9 +248,10 @@ const ClientPage = (props) => {
                     />
                      )}
 
-            </div>  
+            </ul>  
             {clientid ?
-            <div className="clientsDetails">
+
+            <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark nav nav-pills nav-fill gap-3">
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
                         return(
