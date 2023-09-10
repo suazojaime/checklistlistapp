@@ -2,14 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import io from "socket.io-client";
+
+import { jsPDF } from "jspdf";
+
 const socket = io("http://localhost:8000");
 
 const DbChecklist = (props) =>{
     const serverid = useParams()
-    console.log("serverid: " +serverid.id)
+   /*  console.log("serverid: " +serverid.id) */
     const {checklist} = props
     const navigate = useNavigate()
-    console.log(checklist)
+    /* console.log(checklist) */
     const [imageFile, setImageFile] = useState(null);
 
     const [checklistresults , setchecklistresults] = useState({
@@ -71,10 +74,10 @@ const DbChecklist = (props) =>{
 
       useEffect(() => {
         // Emit the updateEvent whenever checklistresults changes
-        console.log('emiting event');
+        /* console.log('emiting event'); */
         /* socket.emit("updateEvent", checklistresults); */
         socket.emit("eventFromClient", checklistresults, (response) => {
-            console.log("Server acknowledged the updateEvent with response:", response);
+            /* console.log("Server acknowledged the updateEvent with response:", response); */
           });
       }, [checklistresults]);
       
@@ -127,9 +130,6 @@ const DbChecklist = (props) =>{
   };
 
 const submitchanges = ()=>{
-    console.log('updagting!!!!')
-    console.log(checklistresults)
-    console.log(checklistresults)
     const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
     
     try{
@@ -145,6 +145,22 @@ const submitchanges = ()=>{
         /* {DriveSpace:false} */
     ).then((result) =>{
         console.log(result)
+
+        const doc = new jsPDF();
+        doc.text(`
+
+        Super Nuevo PDF
+      ---------------------------------
+          DriveSpace:${checklistresults.DriveSpace},
+          DisableIPV6:${checklistresults.DisableIPV6},
+          BestPerformace:{
+              VisualEffects:${checklistresults.BestPerformace.VisualEffects},
+              BackgroundServices:${checklistresults.BestPerformace.BackgroundServices}
+          }
+          ----------------------------
+              `, 10, 10);
+        doc.save("a4.pdf"); // will save the file in the current working directory
+        
         navigate(-1)
     }).catch(error => console.log(error))}
     catch(error){console.log(error)
@@ -187,7 +203,6 @@ const handleImageUpload = (e) => {
 
  // Function to submit the uploaded image to the server
  const submitImageToServer = (e) => {
-  console.log(e)
   const imageName=e.target.name
   if (imageFile) {
 
@@ -216,12 +231,14 @@ const handleImageUpload = (e) => {
     )
       .then((response) => {
         // Handle the server response here
-        console.log(response)
-        if (response.statusText === 'Ok') {
+        console.log(response.statusText)
+        if (response.statusText === 'OK') {
           // Image upload successful
           console.log('Image uploaded successfully');
           // You can reset the imageFile state if needed
           setImageFile(null);
+          alert("Image uploaded successfully");
+
         } else {
           // Handle the error case
           console.error('Image upload failed');

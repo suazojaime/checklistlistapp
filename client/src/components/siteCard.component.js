@@ -12,12 +12,12 @@ const SiteCard = (props) => {
     const navigate = useNavigate('')
 
     return(
-        <div>
+        <div className="gap-3">
         {fileteredsites?
         
                 Object.keys(fileteredsites).map((item, idx) => {
                     return(
-                        <div key={`div ${idx}`} className="siteswrapper"
+                        <div key={`div ${idx}`} className="nav-link active"
                         onClick={()=>navigate(`/site/${fileteredsites[item]._id}`, {state: fileteredsites[item],role })}
                         >
                             <div key={`div2 ${idx}`}>{fileteredsites[item].siteName}</div>
