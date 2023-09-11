@@ -21,7 +21,7 @@ const LogRegPage = (props) => {
       <PageTemplate  title="Welcome to the future of checklists" isclient={false}>
       
       <div className="bigdiv">
-          <div className = "logreqwrapper">
+          <div className = "d-flex w-75">
               <div className = "col-6">
               <UserForm formType={"register"} setUser={setUser} />
               </div>

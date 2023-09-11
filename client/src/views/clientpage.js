@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 /* import 'bootstrap/dist/css/bootstrap.min.css'; */
-import '../mystyle.css'
+/* import '../mystyle.css' */
 import SiteCard from "../components/siteCard.component";
 import { useNavigate } from "react-router-dom";
 import FloatingInput from "../components/floatinginputclient.component";
@@ -211,10 +211,10 @@ const ClientPage = (props) => {
         <div > 
 <PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients}>
 
+          
+            <div className=" row d-flex m-3 justify-content-center mw-20 " >
 
-            <div className="clientsBody bigdiv" >
-
-            <ul className="d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white">
+            <ul className="col-4 d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white justify-content-center">
 
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
@@ -231,11 +231,11 @@ const ClientPage = (props) => {
                 )})}
 
                 {role==='admin'?(
-                <div className="Addclientwrapper">
-                    <div className="addclienbutton" onClick={()=>addclient()}>
+                <div className="d-flex justify-content-center m-3">
+                    <div className="btn btn-warning rounded-circle" onClick={()=>addclient()}>
                         <div>+</div>                        
                     </div>
-                    <div>Add Client</div>
+                    <div> Add Client</div>
                 </div>
                 ):null}
 
@@ -251,7 +251,7 @@ const ClientPage = (props) => {
             </ul>  
             {clientid ?
 
-            <div className="bg-dark text-white col-9">
+            <div className="bg-dark text-white col-8">
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
                         return(
@@ -264,12 +264,12 @@ const ClientPage = (props) => {
                 <SiteCard fileteredsites={fileteredsites} user={props}/>   
                 
                 {role==='admin'?(
-                <div className="twobuttonswrapper">
+                <div className="d-flex m-3 justify-content-center">
                     <div className="Addclientwrapper">
-                        <div className="addclienbutton" onClick={()=>addsite()}>
+                        <div className="btn btn-warning rounded-circle" onClick={()=>addsite()}>
                             <div>+</div>                        
                         </div>
-                        <div>Add Site</div>
+                        <div >Add Site</div>
                     </div>  
                 
                 {isFloatingSite && (
@@ -285,7 +285,7 @@ const ClientPage = (props) => {
                      )}
 
                     <div className="Addclientwrapper">
-                        <div className="removeclientbutton"
+                        <div className="btn btn-danger rounded-circle"
                         onClick={(e)=>deleteclient(e)}>
                             <div>+</div>                        
                         </div>
@@ -299,6 +299,7 @@ const ClientPage = (props) => {
 
 
             </div>
+
             </PageTemplate>
         </div>
 
