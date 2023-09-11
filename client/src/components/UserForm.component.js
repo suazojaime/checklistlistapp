@@ -119,8 +119,8 @@ const UserForm = (props) => {
       </h3>
       <form onSubmit={handleOnSubmitRegistration} >
         {/* II) Email Field */}
-        <div >
-          <label htmlFor="email" >
+        <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
+          <label htmlFor="email" className="col-sm-5 col-form-label" >
             Email:
           </label>
           <div >
@@ -131,7 +131,7 @@ const UserForm = (props) => {
               placeholder="john.doe@example.com"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.email}
-              
+              className="form-control"
             />
             <div >
               {errorMessages?.email}
@@ -140,8 +140,8 @@ const UserForm = (props) => {
         </div>
 
         {/* III) Password Field */}
-        <div >
-          <label htmlFor="password" >
+        <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
+          <label htmlFor="password" className="col-sm-5 col-form-label" >
             Password:
           </label>
           <div className="col-sm-7">
@@ -152,7 +152,7 @@ const UserForm = (props) => {
               placeholder="********"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.password}
-              
+              className="form-control"
             />
             <div >
               {errorMessages?.password}
@@ -167,22 +167,19 @@ const UserForm = (props) => {
 
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
-          <div >
-            <label
-              htmlFor="confirmPassword"
-              
-            >
-              Confirm Password:
+          <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
+            <label  htmlFor="confirmPassword" className="col-sm-5 col-form-label" >
+              ConfirmPassword:
             </label>
-            <div >
+            <div className="col-sm-7">
               <input
                 type="password"
-                id="confirmPassword"
+                id="confirm Password"
                 name="confirmPassword"
                 placeholder="********"
                 onChange={handleOnChangeUserFields}
                 value={userCredentials?.confirmPassword}
-                
+                className="form-control"
               />
               <div >
                 {errorMessages?.confirmPassword}
@@ -193,11 +190,11 @@ const UserForm = (props) => {
 
 
         {formType === "register" && (
-                <div className="mb-2 row text-end">
-                  <label htmlFor="role" className="col-sm-3 col-form-label">
+                <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
+                  <label htmlFor="role" className="col-sm-5 col-form-label">
                     Role:
                   </label>
-                  <div className="col-sm-7">
+                  <div className="col-sm-7 ">
                     <input
                       type="text"
                       id="role"

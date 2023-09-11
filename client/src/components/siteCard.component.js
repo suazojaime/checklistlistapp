@@ -17,7 +17,7 @@ const SiteCard = (props) => {
         
                 Object.keys(fileteredsites).map((item, idx) => {
                     return(
-                        <div key={`div ${idx}`} className="nav-link active"
+                        <div key={`div ${idx}`} className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3 text-black"
                         onClick={()=>navigate(`/site/${fileteredsites[item]._id}`, {state: fileteredsites[item],role })}
                         >
                             <div key={`div2 ${idx}`}>{fileteredsites[item].siteName}</div>

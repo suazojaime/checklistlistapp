@@ -22,10 +22,10 @@ const LogRegPage = (props) => {
       
       <div className="bigdiv">
           <div className = "logreqwrapper">
-              <div className = "register">
+              <div className = "col-6">
               <UserForm formType={"register"} setUser={setUser} />
               </div>
-              <div className = "login">
+              <div className = "  col-6">
               <UserForm formType={"login"} setUser={setUser} />
               </div>
           </div>

@@ -214,13 +214,13 @@ const ClientPage = (props) => {
 
             <div className="clientsBody bigdiv" >
 
-            <ul className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark nav nav-pills nav-fill gap-3">
+            <ul className="d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white">
 
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
                  
                     <li class="nav-item">
-                    <div key={`div ${idx}`} className="nav-link active"
+                    <div key={`div ${idx}`} className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3 text-black"
                     onMouseEnter={()=>getClientDetails(clientsfiltered[item]._id)}>
                         <span key={`span ${idx}`} className="nav-item active">
                             {clientsfiltered[item].company}
@@ -251,7 +251,7 @@ const ClientPage = (props) => {
             </ul>  
             {clientid ?
 
-            <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark nav nav-pills nav-fill gap-3">
+            <div className="bg-dark text-white col-9">
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
                         return(
