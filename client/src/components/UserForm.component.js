@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {baseUrl} from '../config.js'
 
 import axios from "axios";
 import _ from "lodash";
@@ -80,17 +81,18 @@ const UserForm = (props) => {
 
   const loginUser = async () => {
     try {
-      let res = await axios.post(
-        "http://localhost:8000/user/login",
+      const instance = axios.create({baseURL: baseUrl})
+      instance.post(
+        "/user/login",
         userCredentials,
         // this will force the sending of the credentials / cookies so they can be updated
         //    XMLHttpRequest from a different domain cannot set cookie values for their own domain
         //    unless withCredentials is set to true before making the request
         { withCredentials: true }
-      );
+      ).then(res => {
       setUser(res.data.user);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      navigate("/clients");
+      navigate("/clients");}).catch(error => console.log(error))
     } catch (err) {
       console.log("Error: ", err);
       updateErrorMessages(err);
@@ -131,7 +133,7 @@ const UserForm = (props) => {
               placeholder="john.doe@example.com"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.email}
-              className="form-control"
+              className="modal-footer"
             />
           </div>
           

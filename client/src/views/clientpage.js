@@ -10,6 +10,8 @@ import Popup from 'reactjs-popup';
 import {baseUrl} from '../config.js'
 
 import PageTemplate from "../template/PageTemplate";
+import AddClientModal from '../components/floatinginputclient.component.copy'; // Import the new modal component
+
 
 const ClientPage = (props) => {
 
@@ -34,6 +36,8 @@ const ClientPage = (props) => {
     const [clientsfiltered, setclientsfiltered] = useState('')
 
     const[barra,setBarra] = useState('')
+    const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
+
 
     useEffect(()=>{
         const instance = axios.create({baseURL: baseUrl})
@@ -72,7 +76,8 @@ const ClientPage = (props) => {
 
     const addclient = () => {
         // Open the floating input when the "Add Site" button is clicked
-        setIsFloatingInputOpen(true);
+        /* setIsFloatingInputOpen(true); */
+        setIsAddClientModalOpen(true);
       };
     
       const closeFloatingInput = () => {
@@ -219,7 +224,7 @@ const ClientPage = (props) => {
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
                  
-                    <li class="nav-item">
+                    <li className="nav-item">
                     <div key={`div ${idx}`} className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3 text-black"
                     onMouseEnter={()=>getClientDetails(clientsfiltered[item]._id)}>
                         <span key={`span ${idx}`} className="nav-item active">
@@ -230,23 +235,27 @@ const ClientPage = (props) => {
                   
                 )})}
 
-                {role==='admin'?(
-                <div className="d-flex justify-content-center m-3">
-                    <div className="btn btn-warning rounded-circle" onClick={()=>addclient()}>
-                        <div>+</div>                        
-                    </div>
-                    <div> Add Client</div>
-                </div>
-                ):null}
+{role === 'admin' ? (
+      <div className="d-flex justify-content-center m-3 flex-column align-items-center">
+        <div
+          type="button"
+          className="btn btn-warning w-50"
+          onClick={addclient} // Call the addclient function
+        >
+          <div>Add Client</div>
+        </div>
+        <div> </div>
+      </div>
+    ) : null}
 
-                {isFloatingInputOpen && (
-                    <FloatingInput
-                    onClose={closeFloatingInput}
-                    onConfirm={handleInputConfirm}
-                    pleaserender={pleaserender}
-                    setpleaserender={setpleaserender}
-                    />
-                     )}
+    {/* Render the Add Client modal */}
+    <AddClientModal
+      show={isAddClientModalOpen}
+      onHide={() => setIsAddClientModalOpen(false)}
+      onConfirm={handleInputConfirm}
+      pleaserender={pleaserender}
+      setpleaserender={setpleaserender}
+    />
 
             </ul>  
             {clientid ?
@@ -265,7 +274,7 @@ const ClientPage = (props) => {
                 
                 {role==='admin'?(
                 <div className="d-flex m-3 justify-content-center">
-                    <div className="Addclientwrapper">
+                    <div className="d-flex justify-content-center m-3 flex-column align-items-center">
                         <div className="btn btn-warning rounded-circle" onClick={()=>addsite()}>
                             <div>+</div>                        
                         </div>
@@ -284,7 +293,7 @@ const ClientPage = (props) => {
                     />
                      )}
 
-                    <div className="Addclientwrapper">
+                    <div className="d-flex justify-content-center m-3 flex-column align-items-center">
                         <div className="btn btn-danger rounded-circle"
                         onClick={(e)=>deleteclient(e)}>
                             <div>+</div>                        
