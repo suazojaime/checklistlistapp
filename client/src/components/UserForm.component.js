@@ -113,14 +113,14 @@ const UserForm = (props) => {
   // III) JSX
   // --------------------------------------------------
   return (
-    <div >
+    <div className="text-center" >
       <h3 >
         {formType === "register" ? <span>Register</span> : <span>Login</span>}
       </h3>
-      <form onSubmit={handleOnSubmitRegistration} >
+      <form onSubmit={handleOnSubmitRegistration} className="bg-warning border border-dark rounded-3 m-3 fs-6 p-3" >
         {/* II) Email Field */}
         <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-          <label htmlFor="email" className="col-sm-5 col-form-label" >
+          <label htmlFor="email" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
             Email:
           </label>
           <div >
@@ -133,15 +133,16 @@ const UserForm = (props) => {
               value={userCredentials?.email}
               className="form-control"
             />
-            <div >
-              {errorMessages?.email}
-            </div>
           </div>
+          
+        </div>
+        <div className="text-danger fs-6">
+              {errorMessages?.email}
         </div>
 
         {/* III) Password Field */}
         <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-          <label htmlFor="password" className="col-sm-5 col-form-label" >
+          <label htmlFor="password" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
             Password:
           </label>
           <div className="col-sm-7">
@@ -154,21 +155,21 @@ const UserForm = (props) => {
               value={userCredentials?.password}
               className="form-control"
             />
-            <div >
-              {errorMessages?.password}
-            </div>
-            <div >
-              {errorMessages?.login}
-            </div>
+            
           </div>
         </div>
-
+        <div className="text-danger fs-6">
+              {errorMessages?.password}
+            </div>
+            <div className="text-danger fs-6 mb-4">
+              {errorMessages?.login}
+            </div>
        
 
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
           <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-            <label  htmlFor="confirmPassword" className="col-sm-5 col-form-label" >
+            <label  htmlFor="confirmPassword" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
               ConfirmPassword:
             </label>
             <div className="col-sm-7">
@@ -181,17 +182,18 @@ const UserForm = (props) => {
                 value={userCredentials?.confirmPassword}
                 className="form-control"
               />
-              <div >
-                {errorMessages?.confirmPassword}
-              </div>
+              
             </div>
           </div>
+          
         )}
-
+        <div className="text-danger fs-6">
+                {errorMessages?.confirmPassword}
+              </div>
 
         {formType === "register" && (
                 <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-                  <label htmlFor="role" className="col-sm-5 col-form-label">
+                  <label htmlFor="role" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3">
                     Role:
                   </label>
                   <div className="col-sm-7 ">
@@ -204,10 +206,10 @@ const UserForm = (props) => {
                       value={userCredentials?.role}
                       className="form-control"
                     />
-                    <div className="text-danger small text-start">
+                    <div className="text-danger fs-6">
                       {errorMessages?.password}
                     </div>
-                    <div className="text-danger small text-start">
+                    <div className="text-danger fs-6">
                       {errorMessages?.login}
                     </div>
                   </div>
@@ -215,7 +217,7 @@ const UserForm = (props) => {
 
         {/* V) Submit Button */}
         <div >
-          <button type="submit" >
+          <button type="submit" className="btn btn-secondary">
             {formType === "register" ? (
               <span>Register</span>
             ) : (

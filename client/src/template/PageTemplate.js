@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { BsListCheck } from "react-icons/bs";
 
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -41,28 +42,32 @@ const PageTemplate = (props) => {
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center gap-5">
-                        <Navbar.Brand className='fs-3' >{props.title}</Navbar.Brand>
-                        {props.isclient?
-                            <Form inline>
-                                <Row>
-                                <Col xs="auto">
-                                    <Form.Control
-                                    type="text"
-                                    placeholder="Search"
-                                    className=" mr-sm-2"
-                                    onChange={(e) => filteredClients(e)}
-                                    />
-                                </Col>
-                                <Col xs="auto">
-                                    <Button  className='btn btn-light' onClick={logout}>Log Out</Button>
-                                </Col>
-                                </Row>
-                            </Form>: null
-                        }
+                        <Container className='d-flex align-items-center'>
+                            <BsListCheck size={40} className="me-4 text-white"/>
+                            <Navbar.Brand className='fs-3 me-0 '>CheckList</Navbar.Brand>
+                            <Navbar.Brand className='fs-3 container text-center ps-0  pe-5' >{props.title}</Navbar.Brand>
+                            {props.isclient?
+                                <Form className='d-flex col-3 me-0' inline>
+                                    <Row>
+                                    <Col xs="auto">
+                                        <Form.Control
+                                        type="text"
+                                        placeholder="Search"
+                                        className=" mr-sm-2"
+                                        onChange={(e) => filteredClients(e)}
+                                        />
+                                    </Col>
+                                    <Col xs="auto">
+                                        <Button  className='btn btn-light' onClick={logout}>Log Out</Button>
+                                    </Col>
+                                    </Row>
+                                </Form>: null
+                            }
+                        </Container>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <div >{props.children}</div>
+            <div style={{ minHeight: '100vh' }}>{props.children}</div>
             <footer className="bg-dark text-light d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top ">
                 <Container className='pt-3'>
                     <Row className='d-flex justify-content-between'>

@@ -5,6 +5,8 @@ import io from "socket.io-client";
 
 import { jsPDF } from "jspdf";
 
+import { GoTrash } from "react-icons/go";
+
 const socket = io("http://localhost:8000");
 
 const DbChecklist = (props) =>{
@@ -295,11 +297,11 @@ const handleImageUpload = (e) => {
 
             <div className="container d-flex mt-5 justify-content-center gap-5">
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
-                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>submitchanges()}>+</div>
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-4 py-0" onClick={()=>submitchanges()}>+</div>
                     <div >Update Cheklist</div>
                 </div>
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
-                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>deleteserver()}>+</div>
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={()=>deleteserver()}>{<GoTrash/>}</div>
                     <div>Delete Server</div>
                 </div>
             </div>

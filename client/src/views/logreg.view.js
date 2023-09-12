@@ -20,12 +20,12 @@ const LogRegPage = (props) => {
     <div >
       <PageTemplate  title="Welcome to the future of checklists" isclient={false}>
       
-      <div className="bigdiv">
+      <div className="container m-5 d-flex justify-content-center">
           <div className = "d-flex w-75">
               <div className = "col-6">
               <UserForm formType={"register"} setUser={setUser} />
               </div>
-              <div className = "  col-6">
+              <div className = " col-6">
               <UserForm formType={"login"} setUser={setUser} />
               </div>
           </div>

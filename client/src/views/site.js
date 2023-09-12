@@ -4,6 +4,11 @@ import FloatingServerInput from "../components/floatingserverinput.component";
 import { useState,useEffect } from "react";
 import axios from "axios";
 import PageTemplate from '../template/PageTemplate';
+
+import Card from "react-bootstrap/Card";
+
+import { GoTrash } from "react-icons/go";
+
 const SitePage = (props)=>{
     const n = useParams()
     const a = useLocation()
@@ -125,7 +130,7 @@ const SitePage = (props)=>{
         <div className="container m-5 text-center">
             <div className="container d-flex mt-5 justify-content-center gap-5">
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
-                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>addserver()}>+</div>
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-4 py-0" onClick={()=>addserver()}>+</div>
                     <div>Add server</div>
                 </div>
 
@@ -133,7 +138,7 @@ const SitePage = (props)=>{
                 {props.user.role==='admin'?(
 
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
-                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-2" onClick={()=>deletesite()}>+</div>
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={()=>deletesite()}>{<GoTrash/>}</div>
                     <div>Remove site</div>
                 </div>
 
@@ -147,10 +152,16 @@ const SitePage = (props)=>{
             owner={n}
             />
             )}
-            <div className="w-100  mt-5 p-5 rounded-3 bg-warning fs-3">
-                {sitedata.summary}
+            <Card className="w-100  mt-5 p-5 border-dark rounded-3 bg-warning fs-3">
+              <Card.Body>
+                <Card.Title className="fs-1">Summary</Card.Title>
+                <Card.Text className="fs-3">{sitedata.summary}</Card.Text>
+              </Card.Body>
+            </Card>
+            <div className="container text-center mt-5">
+              <h1>Servers</h1>
+              <hr className="border border-3 border-dark opacity-100" />
             </div>
-
             <ServerCards  servers={servers}/>
         </div>
         </PageTemplate>
