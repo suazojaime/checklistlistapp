@@ -12,6 +12,7 @@ import {baseUrl} from '../config.js'
 import PageTemplate from "../template/PageTemplate";
 import AddClientModal from '../components/floatinginputclient.component.copy'; // Import the new modal component
 
+import { GoTrash } from "react-icons/go";
 
 const ClientPage = (props) => {
 
@@ -37,6 +38,7 @@ const ClientPage = (props) => {
 
     const[barra,setBarra] = useState('')
     const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
+    const [isAddSiteModalOpen, setIsAddSiteModalOpen] = useState(false);
 
 
     useEffect(()=>{
@@ -96,7 +98,7 @@ const ClientPage = (props) => {
 
       const addsite = () => {
         // Open the floating input when the "Add Site" button is clicked
-        setisFloatingSite(true);
+        setIsAddSiteModalOpen(true);
       };
     
       const closeFloatingSite = () => {
@@ -216,11 +218,11 @@ const ClientPage = (props) => {
         <div > 
 <PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients}>
 
-          
-            <div className=" row d-flex m-3 justify-content-center mw-20 " >
-
-            <ul className="col-4 d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white justify-content-center">
-
+          <div className='container d-flex'>
+            <div className="container d-flex m-3 justify-content-center w-50 col-6" >
+            
+            <ul className="col-4 d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white justify-content-center w-100">
+            <h3 className="text-center mt-3 mb-0">Clientes</h3>
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
                  
@@ -234,6 +236,7 @@ const ClientPage = (props) => {
                     </li>
                   
                 )})}
+                
 
 {role === 'admin' ? (
       <div className="d-flex justify-content-center m-3 flex-column align-items-center">
@@ -257,10 +260,14 @@ const ClientPage = (props) => {
       setpleaserender={setpleaserender}
     />
 
-            </ul>  
+            </ul> 
+            </div>
+            
+            <div className="container text-center m-3 w-75 col-6 ">
             {clientid ?
 
-            <div className="bg-dark text-white col-8">
+            <div className="bg-dark text-white col-8 p-1 text-center">
+              <h3 className="text-center mt-3 mb-0">Sitios</h3>
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
                         return(
@@ -273,7 +280,7 @@ const ClientPage = (props) => {
                 <SiteCard fileteredsites={fileteredsites} user={props}/>   
                 
                 {role==='admin'?(
-                <div className="d-flex m-3 justify-content-center">
+                <div className="container d-flex m-3 justify-content-center">
                     <div className="d-flex justify-content-center m-3 flex-column align-items-center">
                         <div className="btn btn-warning rounded-circle" onClick={()=>addsite()}>
                             <div>+</div>                        
@@ -281,8 +288,10 @@ const ClientPage = (props) => {
                         <div >Add Site</div>
                     </div>  
                 
-                {isFloatingSite && (
+                {isAddSiteModalOpen && (
                     <FloatingInputSite
+                    show={isAddSiteModalOpen}
+                    onHide={() => setIsAddSiteModalOpen(false)}
                     handleonconfirm={handleonconfirm}
                     onClose={closeFloatingSite}
                     onConfirm={handleSiteConfirm}
@@ -296,7 +305,7 @@ const ClientPage = (props) => {
                     <div className="d-flex justify-content-center m-3 flex-column align-items-center">
                         <div className="btn btn-danger rounded-circle"
                         onClick={(e)=>deleteclient(e)}>
-                            <div>+</div>                        
+                            <div>{<GoTrash/>}</div>                        
                         </div>
                         <div>Drop Client and all Sites</div>
                     </div>    
@@ -308,7 +317,8 @@ const ClientPage = (props) => {
 
 
             </div>
-
+            </div>
+            
             </PageTemplate>
         </div>
 

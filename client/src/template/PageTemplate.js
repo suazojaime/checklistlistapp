@@ -7,13 +7,18 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { BsListCheck } from "react-icons/bs";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import axios from 'axios';
 
 const PageTemplate = (props) => {
     const {filteredClients} = props
     const navigate =  useNavigate();
     const [afuera,setAfuera]=useState(false);
+
+
+    const handelHome = () =>{
+        navigate('/clients');
+    }
 
     const logout = () => {
         setAfuera(true);
@@ -39,13 +44,15 @@ const PageTemplate = (props) => {
     return (
         <div>
             <Navbar  bg="dark" data-bs-theme="dark" >
-                <Container>
+                <Container >
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center gap-5">
-                        <Container className='d-flex align-items-center'>
-                            <BsListCheck size={40} className="me-4 text-white"/>
-                            <Navbar.Brand className='fs-3 me-0 '>CheckList</Navbar.Brand>
-                            <Navbar.Brand className='fs-3 container text-center ps-0  pe-5' >{props.title}</Navbar.Brand>
+                        <Container className='d-flex align-items-center justify-content-between'>
+                            <div style={{ minHeight: '40px', minWidth: '40px' }} onClick={handelHome}>
+                            <BsListCheck size={'40px'} className="me-4 text-white"/>
+                            <Navbar.Brand className='fs-3  '>CheckList</Navbar.Brand>
+                            </div>
+                            <Navbar.Brand className='fs-3 pe-5 me-5' >{props.title}</Navbar.Brand>
                             {props.isclient?
                                 <Form className='d-flex col-3 me-0' inline>
                                     <Row>
@@ -61,7 +68,7 @@ const PageTemplate = (props) => {
                                         <Button  className='btn btn-light' onClick={logout}>Log Out</Button>
                                     </Col>
                                     </Row>
-                                </Form>: null
+                                </Form>: "null"
                             }
                         </Container>
                     </Navbar.Collapse>
