@@ -25,6 +25,7 @@ const handleConfirm = () => {
       handleonconfirm(response.data);
       setpleaserender(pleaserender+1)
       onConfirm(siteName);
+      onHide();
   setsiteName("");
   setacronym("");
   setcountry("");
