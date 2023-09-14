@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const PageTemplate = (props) => {
-    const {filteredClients} = props
+    const {filteredClients, user, setUser} = props
     const navigate =  useNavigate();
     const [afuera,setAfuera]=useState(false);
+    /* console.log(props) */
 
     const logout = () => {
         setAfuera(true);
+        
       };
     
       useEffect(() => {
@@ -25,9 +27,13 @@ const PageTemplate = (props) => {
           instance
             .get('/user/logout', { withCredentials: true })
             .then((response) => {
-              console.log(response);
-              navigate('/login');
+              /* console.log(response); */
               setAfuera(false);
+              setUser(null)
+              localStorage.clear()
+              console.log('useruser :  ' + user)
+              /* navigate('/login'); */
+              
             })
             .catch((error) => console.log('error'));
         }

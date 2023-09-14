@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom"
 
 const SiteCard = (props) => {
     const {fileteredsites} = props
-    console.log('-----------')
-    console.log(props.user.user.role)
+    /* console.log('-----------')
+    console.log(props.user.user.role) */
     const role = props.user.user.role
-    console.log('-----------')
+    /* console.log('-----------') */
     /* const {_id, email, role} = user */
     const navigate = useNavigate('')
 

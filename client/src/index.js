@@ -16,7 +16,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const ProtectedRoute = (props) => {
   // Variables from Props
+  /* console.log(props)
+  console.log('protected  :' + props) */
   const { user, redirectPath = "/login", children } = props;
+  console.log('protected user  :' + user)
+  console.log(user)
 
   // II) JSX
   return <>{!user ? <Navigate to={redirectPath} replace /> : children}</>;
@@ -62,8 +66,8 @@ root.render(
             }</UserProvider>
         } />
         <Route path='/clients' element={
-          <UserProvider>{(user) => (<ProtectedRoute user={user}>
-        <ClientPage user={user}/>
+          <UserProvider>{(user, setUser) => (<ProtectedRoute user={user}>
+        <ClientPage user={user} setUser={setUser}/>
         </ProtectedRoute>)}</UserProvider>
         } />
         <Route path='/site/:id' element={

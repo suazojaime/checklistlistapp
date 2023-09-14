@@ -74,7 +74,7 @@ const UserForm = (props) => {
       // c) Login User
       loginUser();
     } catch (err) {
-      console.log("Error: ", err.response.data);
+      /* console.log("Error: ", err.response.data); */
       updateErrorMessages(err);
     }
   };
@@ -94,7 +94,7 @@ const UserForm = (props) => {
       localStorage.setItem("user", JSON.stringify(res.data.user));
       navigate("/clients");}).catch(error => console.log(error))
     } catch (err) {
-      console.log("Error: ", err);
+      /* console.log("Error: ", err); */
       updateErrorMessages(err);
     }
   };
@@ -209,11 +209,11 @@ const UserForm = (props) => {
                       className="form-control"
                     />
                     <div className="text-danger fs-6">
-                      {errorMessages?.password}
+                      {errorMessages?.role}
                     </div>
-                    <div className="text-danger fs-6">
+                    {/* <div className="text-danger fs-6">
                       {errorMessages?.login}
-                    </div>
+                    </div> */}
                   </div>
                 </div>)}
 

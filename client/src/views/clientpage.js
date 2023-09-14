@@ -15,9 +15,8 @@ import AddClientModal from '../components/floatinginputclient.component.copy'; /
 
 const ClientPage = (props) => {
 
-    console.log(props)
     const {_id, email, role} = props.user
-    console.log(role)
+    const {user, setUser} = props
 
     const [clients, setclients] = useState('')
     const [sites, setsites] = useState('')
@@ -52,7 +51,7 @@ const ClientPage = (props) => {
         const instance = axios.create({baseURL: baseUrl})
         instance.get('/api/v2/site',{ withCredentials: true})
         .then(response =>  setsites(response.data))
-        .catch((error) => console.log('error'))
+        .catch((error) => error)
     },[pleaserender])
 
 
@@ -88,7 +87,7 @@ const ClientPage = (props) => {
     
       const handleInputConfirm = (value) => {
         // Handle the input data (e.g., send it to the server)
-        console.log("Input Value:", value);
+        /* console.log("Input Value:", value); */
         closeFloatingInput();
       };
 
@@ -107,7 +106,7 @@ const ClientPage = (props) => {
     
       const handleSiteConfirm = (value) => {
         // Handle the input data (e.g., send it to the server)
-        console.log("Input Value:", value);
+        /* console.log("Input Value:", value); */
         closeFloatingSite();
       };
 
@@ -173,21 +172,21 @@ const ClientPage = (props) => {
           await Promise.all(
             serverCheckIdsToDelete.map(async (serverCheckId) => {
               await instance.delete('api/v2/servercheck/' + serverCheckId);
-              console.log('checklistDeleted');
+              /* console.log('checklistDeleted'); */
             })
           );
       
           await Promise.all(
             serverIdsToDelete.map(async (serverId) => {
               await instance.delete('api/v2/server/' + serverId);
-              console.log('ServerDeleted');
+              /* console.log('ServerDeleted'); */
             })
           );
       
           await Promise.all(
             siteIdsToDelete.map(async (siteId) => {
               await instance.delete('api/v2/site/' + siteId);
-              console.log('SiteDeleted');
+              /* console.log('SiteDeleted'); */
             })
           );
 
@@ -196,7 +195,7 @@ const ClientPage = (props) => {
           // Navigate after all deletions are complete
           navigate('/clients');
         } catch (error) {
-          console.log(error);
+          /* console.log(error); */
         }
       };
 
@@ -205,7 +204,7 @@ const ClientPage = (props) => {
         const clientes_filtered = clients.filter(item=>{
           return item.company.includes(e.target.value) 
         })
-        console.log(clientes_filtered)
+        /* console.log(clientes_filtered) */
         setclientsfiltered(clientes_filtered) 
       }
       
@@ -214,7 +213,7 @@ const ClientPage = (props) => {
     return(
         
         <div > 
-<PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients}>
+<PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients} user={user} setUser={setUser}>
 
           
             <div className=" row d-flex m-3 justify-content-center mw-20 " >
