@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Modal, Button } from 'react-bootstrap';
 import _ from "lodash";
 
-const FloatingInputSite = ({ onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid, handleonconfirm }) => {
+const FloatingInputSite = ({show, onHide, onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid, handleonconfirm }) => {
   const [siteName, setsiteName] = useState('')
   const [acronym, setacronym] = useState('')
   const [country, setcountry] = useState('')
@@ -58,16 +59,21 @@ const handleConfirm = () => {
 
   return (
     
-    <div className="floating-input-container">
+      <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Add Server</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
       <div>
       <input
         type="text"
         placeholder="SiteName"
         value={siteName}
         onChange={(e)=>setsiteName(e.target.value)}
+        className="form-control mb-3"
         
       />
-      <div className="error">
+      <div className="text-danger mb-3 text-center">
               {errorMessages?.data?.siteName}
       </div>
       </div>
@@ -78,8 +84,9 @@ const handleConfirm = () => {
         placeholder="Acronym"
         value={acronym}
         onChange={(e)=>setacronym(e.target.value)}
+        className="form-control mb-3"
       />
-      <div className="error">
+      <div className="text-danger mb-3 text-center">
               {errorMessages?.data?.acronym}
       </div>
       </div>
@@ -90,8 +97,9 @@ const handleConfirm = () => {
         placeholder="Country"
         value={country}
         onChange={(e)=>setcountry(e.target.value)}
+        className="form-control mb-3"
       />
-      <div className="error">
+      <div className="text-danger mb-3 text-center">
               {errorMessages?.data?.country}
       </div>
       </div>
@@ -103,10 +111,22 @@ const handleConfirm = () => {
         placeholder="Summary"
         value={summary}
         onChange={(e)=>setsummary(e.target.value)}
+        className="form-control mb-3"
       />
-      <div>{filteredObjects[0].company}</div>
-      <button onClick={handleConfirm}>Confirm</button>
-    </div>
+      <div className="text-center">
+        <p>Add Site To: {filteredObjects[0].company}</p>
+      </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Cancel
+        </Button>
+        <Button variant="primary" onClick={handleConfirm}>
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
+
   );
 };
 

@@ -133,7 +133,7 @@ const UserForm = (props) => {
               placeholder="john.doe@example.com"
               onChange={handleOnChangeUserFields}
               value={userCredentials?.email}
-              className="modal-footer"
+              className="form-control"
             />
           </div>
           

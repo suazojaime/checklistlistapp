@@ -14,17 +14,22 @@ const SitePage = (props)=>{
     const a = useLocation()
     const navigate = useNavigate()
 
-    console.log(props.user.role)
+    // console.log(props.user.role)
 
     const [serverscheckToDelete,setserverscheckToDelete ] = useState('')
     const [serversToDelete, setserversToDelete] = useState('')
     const [siteToDelete, setsiteToDelete ] = useState('')
 
-
-    /* console.log("n  : " +n.id) */
+    const [isAddServerModalOpen, setIsAddServerModalOpen] = useState(false);
+    // console.log(isAddServerModalOpen, "isAddServerModalOpen")
 
     const [servers, setservers] = useState("")
  
+    const addserver = () => {
+      // Open the floating input when the "Add Site" button is clicked
+      setIsAddServerModalOpen(true);
+
+    };
 
     useEffect(()=>{
         const instance = axios.create({baseURL: 'http://localhost:8000'})
@@ -42,10 +47,7 @@ const SitePage = (props)=>{
     const [FloatingServer, setFloatingServer] = useState('')
     const [inputserver, setinputserver] = useState('')
 
-    const addserver = () => {
-        // Open the floating input when the "Add Site" button is clicked
-        setFloatingServer(true);
-      };
+    
     
       const closeFloatingServer = () => {
         // Close the floating input and clear input value
@@ -126,11 +128,11 @@ const SitePage = (props)=>{
     return(
         <div>
           <PageTemplate  title={sitedata.siteName} isclient={false}>
-
+          <div className='container'>
         <div className="container m-5 text-center">
             <div className="container d-flex mt-5 justify-content-center gap-5">
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
-                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-4 py-0" onClick={()=>addserver()}>+</div>
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-4 py-0" onClick={addserver}>+</div>
                     <div>Add server</div>
                 </div>
 
@@ -144,8 +146,10 @@ const SitePage = (props)=>{
 
                 ):null}
             </div>
-            {FloatingServer && (
+            {isAddServerModalOpen && (
             <FloatingServerInput
+            show={isAddServerModalOpen}
+            onHide={() => setIsAddServerModalOpen(false)}
             handleonconfirm={handleonconfirm}
             onClose={closeFloatingServer}
             onConfirm={handleServer}
@@ -163,6 +167,7 @@ const SitePage = (props)=>{
               <hr className="border border-3 border-dark opacity-100" />
             </div>
             <ServerCards  servers={servers}/>
+        </div>
         </div>
         </PageTemplate>
         </div>
