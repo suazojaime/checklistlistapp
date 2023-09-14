@@ -7,7 +7,7 @@ import { jsPDF } from "jspdf";
 
 import { GoTrash } from "react-icons/go";
 
-const socket = io("http://localhost:8000");
+const socket = io("http://192.168.0.232:8000");
 
 const DbChecklist = (props) =>{
     const serverid = useParams()

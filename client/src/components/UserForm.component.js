@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {baseUrl} from '../config.js'
 
+
 import axios from "axios";
 import _ from "lodash";
 
@@ -56,7 +57,7 @@ const UserForm = (props) => {
     try {
       // a) Send POST request to register user
       let res = await axios.post(
-        "http://localhost:8000/user/register",
+        baseUrl+"/user/register",
         userCredentials,
         // this will force the sending of the credentials / cookies so they can be updated
         //    XMLHttpRequest from a different domain cannot set cookie values for their own domain
