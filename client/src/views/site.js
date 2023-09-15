@@ -5,7 +5,7 @@ import { useState,useEffect } from "react";
 import axios from "axios";
 import PageTemplate from '../template/PageTemplate';
 
-import Card from "react-bootstrap/Card";
+import {Card, Modal, Button } from "react-bootstrap";
 
 import { GoTrash } from "react-icons/go";
 
@@ -22,6 +22,7 @@ const SitePage = (props)=>{
 
     const [isAddServerModalOpen, setIsAddServerModalOpen] = useState(false);
     // console.log(isAddServerModalOpen, "isAddServerModalOpen")
+    const [isDeleteSiteModalOpen, setIsDeleteSiteModalOpen] = useState(false);
 
     const [servers, setservers] = useState("")
  
@@ -60,8 +61,15 @@ const SitePage = (props)=>{
         console.log("Input Value:", value);
         closeFloatingServer();
       };
+      const deletesitemodal = () => {
 
+        setIsDeleteSiteModalOpen(true);
+        
+      };
 
+      const handleClose = () => {
+        setIsDeleteSiteModalOpen(false)
+      }
        const handleonconfirm=(newserver)=>{
          const newservers =[...servers];
          newservers.push(newserver);
@@ -140,10 +148,29 @@ const SitePage = (props)=>{
                 {props.user.role==='admin'?(
 
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
-                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={()=>deletesite()}>{<GoTrash/>}</div>
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={deletesitemodal}>{<GoTrash/>}</div>
                     <div>Remove site</div>
+                
+                
+                {isDeleteSiteModalOpen && (
+                  <Modal show={isDeleteSiteModalOpen} onHide={handleClose} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Remove site</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  <p className="text-danger">Are you sure you want to Remove site and Servers</p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button variant="danger" onClick={()=>deletesite()}>
+                      Delete
+                    </Button>
+                  </Modal.Footer>
+                </Modal>  
+                )}
                 </div>
-
                 ):null}
             </div>
             {isAddServerModalOpen && (

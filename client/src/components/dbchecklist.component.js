@@ -6,6 +6,8 @@ import io from "socket.io-client";
 import { jsPDF } from "jspdf";
 
 import { GoTrash } from "react-icons/go";
+import { TfiSave } from "react-icons/tfi";
+import { Modal, Button } from 'react-bootstrap';
 
 const socket = io("http://192.168.0.232:8000");
 
@@ -16,7 +18,7 @@ const DbChecklist = (props) =>{
     const navigate = useNavigate()
     /* console.log(checklist) */
     const [imageFile, setImageFile] = useState(null);
-
+    const [isDeleteServerModalOpen, setIsDeleteServerModalOpen] = useState(false);
     const [checklistresults , setchecklistresults] = useState({
         DriveSpace:false,
         DisableIPV6:false,
@@ -26,7 +28,15 @@ const DbChecklist = (props) =>{
         },
         owner:serverid.id
    });
+   const deleteservermodal = () => {
 
+    setIsDeleteServerModalOpen(true);
+    
+  };
+
+  const handleClose = () => {
+    setIsDeleteServerModalOpen(false)
+  }
     useEffect(() => {
         // Only set the initial state if the checklist prop is available
         if (checklist) {
@@ -297,13 +307,31 @@ const handleImageUpload = (e) => {
 
             <div className="container d-flex mt-5 justify-content-center gap-5">
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 me-5">
-                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-4 py-0" onClick={()=>submitchanges()}>+</div>
-                    <div >Update Cheklist</div>
+                    <div className="btn btn-dark rounded-5 d-flex justify-content-center fs-1 px-3 py-3" onClick={()=>submitchanges()}>{<TfiSave/>}</div>
+                    <div >Save Changes</div>
                 </div>
                 <div className="d-flex justify-content-center flex-column align-items-center col-3 ms-5">
-                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={()=>deleteserver()}>{<GoTrash/>}</div>
+                    <div className="btn btn-danger rounded-5 d-flex justify-content-center fs-3 px-4 py-3" onClick={deleteservermodal}>{<GoTrash/>}</div>
                     <div>Delete Server</div>
                 </div>
+                {isDeleteServerModalOpen && (
+                  <Modal show={isDeleteServerModalOpen} onHide={handleClose} centered>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Delete Server</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                  <p className="text-danger">Are you sure you want to Delete Server</p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Cancel
+                    </Button>
+                    <Button variant="danger" onClick={()=>deleteserver()}>
+                      Delete
+                    </Button>
+                  </Modal.Footer>
+                </Modal>  
+                )}
             </div>
 
         </div>

@@ -13,6 +13,7 @@ import PageTemplate from "../template/PageTemplate";
 import AddClientModal from '../components/floatinginputclient.component.copy'; // Import the new modal component
 
 import { GoTrash } from "react-icons/go";
+import { Modal, Button } from 'react-bootstrap';
 
 const ClientPage = (props) => {
 
@@ -38,6 +39,7 @@ const ClientPage = (props) => {
     const[barra,setBarra] = useState('')
     const [isAddClientModalOpen, setIsAddClientModalOpen] = useState(false);
     const [isAddSiteModalOpen, setIsAddSiteModalOpen] = useState(false);
+    const [isDeleteClientModalOpen, setIsDeleteClientModalOpen] = useState(false);
 
 
     useEffect(()=>{
@@ -99,6 +101,16 @@ const ClientPage = (props) => {
         // Open the floating input when the "Add Site" button is clicked
         setIsAddSiteModalOpen(true);
       };
+
+      const deleteclientmodal = () => {
+
+        setIsDeleteClientModalOpen(true);
+        
+      };
+      const handleClose = () => {
+        setIsDeleteClientModalOpen(false)
+      }
+      // console.log(isDeleteClientModalOpen,"isDeleteClientModalOpen");
     
       const closeFloatingSite = () => {
         // Close the floating input and clear input value
@@ -134,7 +146,7 @@ const ClientPage = (props) => {
 
       const deleteclient = async () => {
         const instance = axios.create({ baseURL: baseUrl, withCredentials: true });
-      
+        handleClose();
         try {
           const response = await instance.get('api/v2/site/owner/' + clientid);
           const siteData = response.data;
@@ -303,11 +315,29 @@ const ClientPage = (props) => {
 
                     <div className="d-flex justify-content-center m-3 flex-column align-items-center">
                         <div className="btn btn-danger rounded-circle"
-                        onClick={(e)=>deleteclient(e)}>
+                        onClick={deleteclientmodal}>
                             <div>{<GoTrash/>}</div>                        
                         </div>
                         <div>Drop Client and all Sites</div>
-                    </div>    
+                    </div>
+                    {isDeleteClientModalOpen && (
+                    <Modal show={isDeleteClientModalOpen} onHide={handleClose} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Drop Client and all Sites</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p className="text-danger">Are you sure you want to Drop Client and all Sites</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={handleClose}>
+                        Cancel
+                      </Button>
+                      <Button variant="danger" onClick={(e)=>deleteclient(e)}>
+                        Delete
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>  
+                  )}  
                 </div>   
                 ):null}
 
