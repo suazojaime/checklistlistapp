@@ -126,7 +126,7 @@ const UserForm = (props) => {
           <label htmlFor="email" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
             Email:
           </label>
-          <div >
+          <div className="col-sm-7">
             <input
               type="email"
               id="email"
@@ -137,7 +137,7 @@ const UserForm = (props) => {
               className="form-control"
             />
           </div>
-          
+
         </div>
         <div className="text-danger fs-6">
               {errorMessages?.email}
@@ -158,7 +158,7 @@ const UserForm = (props) => {
               value={userCredentials?.password}
               className="form-control"
             />
-            
+
           </div>
         </div>
         <div className="text-danger fs-6">
@@ -167,7 +167,7 @@ const UserForm = (props) => {
             <div className="text-danger fs-6 mb-4">
               {errorMessages?.login}
             </div>
-       
+
 
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
@@ -185,10 +185,10 @@ const UserForm = (props) => {
                 value={userCredentials?.confirmPassword}
                 className="form-control"
               />
-              
+
             </div>
           </div>
-          
+
         )}
         <div className="text-danger fs-6">
                 {errorMessages?.confirmPassword}
@@ -229,7 +229,7 @@ const UserForm = (props) => {
           </button>
         </div>
 
-        
+
       </form>
     </div>
   );
