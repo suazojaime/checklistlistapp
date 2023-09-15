@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
 import _ from "lodash";
+import {baseUrl} from '../config.js'
 
 const FloatingInputSite = ({show, onHide, onClose, onConfirm, pleaserender,setpleaserender, owner, ownerid, handleonconfirm }) => {
   const [siteName, setsiteName] = useState('')
@@ -13,7 +14,7 @@ const FloatingInputSite = ({show, onHide, onClose, onConfirm, pleaserender,setpl
 const [errorMessages, setErrorMessages] = useState({});
 
 const handleConfirm = () => {
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     instance.post('/api/v2/site/',{
         siteName:siteName,
         acronym:acronym,

@@ -9,6 +9,7 @@ import { BsListCheck } from "react-icons/bs";
 
 import { useNavigate, Navigate } from "react-router-dom";
 import axios from "axios";
+import {baseUrl} from '../config.js'
 
 const PageTemplate = (props) => {
   const { filteredClients, user, setUser } = props;
@@ -26,7 +27,7 @@ const PageTemplate = (props) => {
 
   useEffect(() => {
     if (afuera) {
-      const instance = axios.create({ baseURL: "http://localhost:8000" });
+      const instance = axios.create({ baseURL: baseUrl });
       instance
         .get("/user/logout", { withCredentials: true })
         .then((response) => {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios'; // Import Axios
 import _ from "lodash";
+import {baseUrl} from '../config.js'
 
 const AddClientModal = ({ show, onHide, onConfirm, pleaserender, setpleaserender }) => {
   const [inputValue, setInputValue] = useState('');
@@ -14,7 +15,7 @@ const AddClientModal = ({ show, onHide, onConfirm, pleaserender, setpleaserender
   const handleConfirm = () => {
     // Perform Axios call to add a client
     const instance = axios.create({
-      baseURL: 'http://localhost:8000', // Replace with your API base URL
+      baseURL: baseUrl, // Replace with your API base URL
       withCredentials: true,
     });
 

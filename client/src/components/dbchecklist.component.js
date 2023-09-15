@@ -9,7 +9,9 @@ import { GoTrash } from "react-icons/go";
 import { TfiSave } from "react-icons/tfi";
 import { Modal, Button } from 'react-bootstrap';
 
-const socket = io("http://192.168.0.232:8000");
+import {baseUrl} from '../config.js'
+
+const socket = io(baseUrl);
 
 const DbChecklist = (props) =>{
     const serverid = useParams()
@@ -142,7 +144,7 @@ const DbChecklist = (props) =>{
   };
 
 const submitchanges = ()=>{
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     
     try{
     instance.post('/api/v2/servercheck/'+checklist._id,
@@ -191,7 +193,7 @@ const submitchanges = ()=>{
 }
 
 const deleteserver = ()=>{
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     
     try{
         instance.delete('/api/v2/servercheck/'+checklist._id)
@@ -234,7 +236,7 @@ const handleImageUpload = (e) => {
 
     const formData = new FormData();
     formData.append('image', imageFile, newImageName);
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     instance.post('/api/image/v3/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

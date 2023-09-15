@@ -8,6 +8,7 @@ import PageTemplate from '../template/PageTemplate';
 import {Card, Modal, Button } from "react-bootstrap";
 
 import { GoTrash } from "react-icons/go";
+import {baseUrl} from '../config.js'
 
 const SitePage = (props)=>{
     const n = useParams()
@@ -33,7 +34,7 @@ const SitePage = (props)=>{
     };
 
     useEffect(()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
+        const instance = axios.create({baseURL: baseUrl})
         instance.get('/api/v2/server/owner/'+sitedata._id,{ withCredentials: true})
         .then(response =>  setservers(response.data))
         console.log(servers)
@@ -78,7 +79,7 @@ const SitePage = (props)=>{
        }
 
       const deletesite = async () => {
-        const instance = axios.create({ baseURL: 'http://localhost:8000', withCredentials: true });
+        const instance = axios.create({ baseURL: baseUrl, withCredentials: true });
       
         try {
           const response = await instance.get('api/v2/server/owner/' + n.id);

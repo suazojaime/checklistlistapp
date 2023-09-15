@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import _ from "lodash";
+import {baseUrl} from '../config.js'
 
 const FloatingInput = ({ onClose, onConfirm, pleaserender,setpleaserender }) => {
   const [inputValue, setInputValue] = useState("");
@@ -12,7 +13,7 @@ const FloatingInput = ({ onClose, onConfirm, pleaserender,setpleaserender }) => 
   };
 
   const handleConfirm = () => {
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     instance.post('/api/v2/company/',{company:inputValue})
     .then((response)=>{console.log(response)
         setpleaserender(pleaserender+1)

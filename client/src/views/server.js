@@ -6,6 +6,7 @@ import ChecklistDetails from "../components/checklistdetails.component";
 import axios, { Axios } from "axios";
 
 import PageTemplate from '../template/PageTemplate';
+import {baseUrl} from '../config.js'
 
 const ServerView = (props) =>{
     const serverid = useParams()
@@ -14,7 +15,7 @@ const ServerView = (props) =>{
     const [checklists, setchecklists] = useState('')
    
     useEffect(()=>{
-        const instance = axios.create({baseURL: 'http://localhost:8000'})
+        const instance = axios.create({baseURL: baseUrl})
         instance.get('/api/v2/servercheck/owner/'+serverid.id,{ withCredentials: true})
         .then(response =>  setchecklists(response.data))
     },[])

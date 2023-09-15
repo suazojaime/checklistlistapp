@@ -3,6 +3,7 @@ import React, { useState,useEffect } from "react";
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
+import {baseUrl} from '../config.js'
 
 const FloatingServerInput = ({ show, onHide, onClose, onConfirm, owner,handleonconfirm}) => {
   const [Application, setApplication] = useState('')
@@ -17,7 +18,7 @@ const FloatingServerInput = ({ show, onHide, onClose, onConfirm, owner,handleonc
 
 
 const handleConfirm = () => {
-    const instance = axios.create({baseURL: 'http://localhost:8000', withCredentials: true})
+    const instance = axios.create({baseURL: baseUrl, withCredentials: true})
     instance.post('/api/v2/server/',{
       Application:Application,
       hostname:hostname,
