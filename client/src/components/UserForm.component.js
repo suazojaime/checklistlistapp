@@ -122,8 +122,8 @@ const UserForm = (props) => {
       </h3>
       <form onSubmit={handleOnSubmitRegistration} className="bg-warning border border-dark rounded-3 m-3 fs-6 p-3" >
         {/* II) Email Field */}
-        <div className="d-flex bg-warning m-3 p-3 text-black rounded-3 justify-content-between">
-          <label htmlFor="email" className="col-sm-4 col-form-label rounded-3 bg-warning-subtle" >
+        <div className="d-flex bg-warning m-3 py-3 pe-3 text-black rounded-3 justify-content-between">
+          <label htmlFor="email" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle me-3 " >
             Email:
           </label>
           <div className="col-sm-7">
@@ -144,8 +144,8 @@ const UserForm = (props) => {
         </div>
 
         {/* III) Password Field */}
-        <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-          <label htmlFor="password" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
+        <div className="d-flex bg-warning m-3 py-3 pe-3 text-black rounded-3 ">
+          <label htmlFor="password" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle me-3" >
             Password:
           </label>
           <div className="col-sm-7">
@@ -171,8 +171,8 @@ const UserForm = (props) => {
 
         {/* IV) Confirm Password Field */}
         {formType === "register" && (
-          <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-            <label  htmlFor="confirmPassword" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3" >
+          <div className="d-flex bg-warning m-3 py-3 pe-3 text-black rounded-3">
+            <label  htmlFor="confirmPassword" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle me-3" >
               ConfirmPassword:
             </label>
             <div className="col-sm-7">
@@ -195,8 +195,8 @@ const UserForm = (props) => {
               </div>
 
         {formType === "register" && (
-                <div className="d-flex bg-warning m-3 p-3 text-black rounded-3">
-                  <label htmlFor="role" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle mx-3">
+                <div className="d-flex bg-warning m-3 py-3 pe-3 text-black rounded-3">
+                  <label htmlFor="role" className="col-sm-5 col-form-label rounded-3 bg-warning-subtle me-3">
                     Role:
                   </label>
                   <div className="col-sm-7 ">

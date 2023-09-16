@@ -71,12 +71,13 @@ The following technologies are used for the implementation of this project:
 - **Package Managers**:
 
   [![NPM][npm-badge]][npm-url]
+  [![Nodemon Badge][nodemon-badge]][nodemon-url]
 
 - **Databases**:
 
   [![MongoDB][mongodb-badge]][mongodb-url]
   [![Mongoose][mongoose-badge]][mongoose-url]
-  [![Nodemon Badge][nodemon-badge]][nodemon-url]
+  
 
 - **Tools and Platforms**:
 

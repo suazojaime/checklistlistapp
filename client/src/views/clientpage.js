@@ -64,9 +64,10 @@ const ClientPage = (props) => {
         setclientid(props)
         
         if(sites){
-        const filteredObjects = sites.filter(obj => obj.owner._id === props);
+        const filteredObjects = sites.filter(obj => obj.owner._id === props._id);
         /* console.log(filteredObjects) */
         // setclientid(props,()=>{setfileteredsites(filteredObjects)})
+        console.log(props)
         setfileteredsites(filteredObjects)
         
         
@@ -148,7 +149,7 @@ const ClientPage = (props) => {
         const instance = axios.create({ baseURL: baseUrl, withCredentials: true });
         handleClose();
         try {
-          const response = await instance.get('api/v2/site/owner/' + clientid);
+          const response = await instance.get('api/v2/site/owner/' + clientid._id);
           const siteData = response.data;
       
           // Set the values in a single batch to trigger state updates
@@ -156,7 +157,7 @@ const ClientPage = (props) => {
           const serverIdsToDelete = [];
           const serverCheckIdsToDelete = [];
 
-          removeFromDomClient(clientid);
+          removeFromDomClient(clientid._id);
       
           for (const site of siteData) {
             siteIdsToDelete.push(site._id);
@@ -204,7 +205,7 @@ const ClientPage = (props) => {
             })
           );
 
-          await instance.delete('api/v2/company/' + clientid);
+          await instance.delete('api/v2/company/' + clientid._id);
             
           // Navigate after all deletions are complete
           navigate('/clients');
@@ -229,17 +230,17 @@ const ClientPage = (props) => {
         <div > 
 <PageTemplate  title="Clients" isclient={true} filteredClients={filteredClients} user={user} setUser={setUser}>
 
-          <div className='container d-flex'>
+          <div className='container d-flex mt-4'>
             <div className="container d-flex m-3 justify-content-center w-50 col-6" >
             
-            <ul className="col-4 d-flex flex-column text-black bg-dark nav nav-pills nav-fill gap-3 col-3 text-white justify-content-center w-100">
+            <ul className="col-4 d-flex flex-column text-black bg-warning rounded-3 border border-dark nav nav-pills nav-fill gap-3 col-3 text-dark justify-content-center w-100">
             <h3 className="text-center mt-3 mb-0">Clientes</h3>
             {Object.keys(clientsfiltered).map((item, idx) => {
                 return(
                  
                     <li className="nav-item">
-                    <div key={`div ${idx}`} className="d-flex bg-warning m-3 p-3 border border-3 border-dark rounded-3 text-black"
-                    onMouseEnter={()=>getClientDetails(clientsfiltered[item]._id)}>
+                    <div key={`div ${idx}`} className="d-flex bg-secondary m-3 p-3 border border-3 border-dark rounded-3 text-white"
+                    onMouseEnter={()=>getClientDetails(clientsfiltered[item])}>
                         <span key={`span ${idx}`} className="nav-item active">
                             {clientsfiltered[item].company}
                         </span>
@@ -253,7 +254,7 @@ const ClientPage = (props) => {
       <div className="d-flex justify-content-center m-3 flex-column align-items-center">
         <div
           type="button"
-          className="btn btn-warning w-50"
+          className="btn btn-dark w-50"
           onClick={addclient} // Call the addclient function
         >
           <div>Add Client</div>
@@ -277,8 +278,8 @@ const ClientPage = (props) => {
             <div className="container text-center m-3 w-75 col-6 ">
             {clientid ?
 
-            <div className="bg-dark text-white col-8 p-1 text-center">
-              <h3 className="text-center mt-3 mb-0">Sitios</h3>
+            <div className="bg-warning border border-dark rounded-3  col-8 p-1 text-center">
+              <h3 className="text-center mt-3 mb-0">Sitios de {clientid.company}</h3>
                 {/* {
                     Object.keys(fileteredsites).map((item, idx) => {
                         return(
@@ -293,7 +294,7 @@ const ClientPage = (props) => {
                 {role==='admin'?(
                 <div className="container d-flex m-3 justify-content-center">
                     <div className="d-flex justify-content-center m-3 flex-column align-items-center">
-                        <div className="btn btn-warning rounded-circle" onClick={()=>addsite()}>
+                        <div className="btn btn-dark rounded-circle" onClick={()=>addsite()}>
                             <div>+</div>                        
                         </div>
                         <div >Add Site</div>
@@ -309,7 +310,7 @@ const ClientPage = (props) => {
                     pleaserender={pleaserender}
                     setpleaserender={setpleaserender}
                     owner={clients}
-                    ownerid={clientid}
+                    ownerid={clientid._id}
                     />
                      )}
 

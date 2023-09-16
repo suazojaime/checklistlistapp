@@ -88,8 +88,8 @@ const PageTemplate = (props) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div>{props.children}</div>
-      <footer className="bg-dark text-light d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top ">
+      <div style={{minHeight: '100vh'}}>{props.children}</div>
+      <footer className="bg-dark text-light d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top " >
         <Container className="pt-3">
           <Row className="d-flex justify-content-between">
             <Col className="text-center">
