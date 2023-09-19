@@ -67,6 +67,7 @@ The following technologies are used for the implementation of this project:
   [![NodeJS][node-js-badge]][node-js-url]
   [![ExpressJS][express-js-badge]][express-js-url]
   [![Lodash Badge][Lodash-badge]][lodash-url]
+  [![Socket.io Badge][socket.io-badge]][socket.io-url]
 
 - **Package Managers**:
 
@@ -300,6 +301,10 @@ Developed with ❤️ in Chile 🇨🇱
 
 [ruby-sinatra-badge]: https://img.shields.io/badge/Ruby%20Sinatra-000?logo=rubysinatra&logoColor=fff&style=for-the-badge
 [ruby-sinatra-url]: https://sinatrarb.com/
+
+
+[socket.io-badge]:https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff&style=for-the-badge
+[socket.io-url]:https://socket.io/
 
 <!-- Django -->
 
