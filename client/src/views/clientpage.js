@@ -4,7 +4,6 @@ import axios from 'axios';
 /* import '../mystyle.css' */
 import SiteCard from "../components/siteCard.component";
 import { useNavigate } from "react-router-dom";
-import FloatingInput from "../components/floatinginputclient.component";
 import FloatingInputSite from "../components/floatinginputsite.component";
 import Popup from 'reactjs-popup';
 import {baseUrl} from '../config.js'

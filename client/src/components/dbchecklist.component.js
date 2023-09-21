@@ -52,6 +52,7 @@ const DbChecklist = (props) =>{
           if (JSON.stringify(data) !== JSON.stringify(checklistresults)) {
             setchecklistresults(data);
           }
+          console.log('listening!!!!!  ',data)
         };
       
         socket.on("updateEvent", updateEventListener);
@@ -66,10 +67,19 @@ const DbChecklist = (props) =>{
  
       const handleDriveSpaceChange = (e) => {
         const updatedValue = e.target.checked;
-        setchecklistresults((prevChecklist) => ({
-          ...prevChecklist,
+        const newstate = {
+          ...checklistresults,
           DriveSpace: updatedValue,
-        }));
+        }
+
+        setchecklistresults(newstate)
+        console.log(updatedValue)
+        
+        socket.emit("eventFromClient", newstate, (response) => {
+             console.log("Server acknowledged the updateEvent with response:", response); 
+          });
+       
+        
         
        /*  // Emit the updateEvent to the server with the updated value
         socket.emit("eventFromClient", { DriveSpace: updatedValue }); */
@@ -77,24 +87,24 @@ const DbChecklist = (props) =>{
 
       const handleDisableIPV6Change = (e) => {
         const updatedValue = e.target.checked;
-        setchecklistresults((prevChecklist) => ({
-          ...prevChecklist,
+        const newstate = {
+          ...checklistresults,
           DisableIPV6: updatedValue,
-        }));
+        }
+        setchecklistresults(newstate)
+        console.log(updatedValue)
+        
+        socket.emit("eventFromClient", newstate, (response) => {
+             console.log("Server acknowledged the updateEvent with response:", response); 
+          });
+       
+        
     
         /* // Emit the updateEvent to the server with the updated value
         socket.emit("eventFromClient", { DisableIPV6: updatedValue }); */
       };
 
-      useEffect(() => {
-        // Emit the updateEvent whenever checklistresults changes
-        /* console.log('emiting event'); */
-        /* socket.emit("updateEvent", checklistresults); */
-        socket.emit("eventFromClient", checklistresults, (response) => {
-            /* console.log("Server acknowledged the updateEvent with response:", response); */
-          });
-      }, [checklistresults]);
-      
+
       // Repeat the same pattern for handleVisualEffectsChange and handleBackgroundServicesChange
       
 
@@ -104,43 +114,37 @@ const DbChecklist = (props) =>{
 
     const handleVisualEffectsChange = (e) => {
         const { name, checked } = e.target;
-      
-        setchecklistresults((prevChecklist) => {
-          // Create a shallow copy of the checklistresults
-          const updatedChecklist = { ...prevChecklist };
-      
-          // Create a shallow copy of BestPerformance
-          const updatedBestPerformance = { ...updatedChecklist.BestPerformace };
-      
-          // Update the VisualEffects property
-          updatedBestPerformance.VisualEffects = checked;
-      
-          // Update the BestPerformance property in the checklistresults
-          updatedChecklist.BestPerformace = updatedBestPerformance;
-      
-          return updatedChecklist;
-        });
+
+        const newstate = {
+          ...checklistresults,
+          
+        }
+
+        newstate.BestPerformace.VisualEffects = checked
+        setchecklistresults(newstate)
+        
+        socket.emit("eventFromClient", newstate, (response) => {
+             console.log("Server acknowledged the updateEvent with response:", response); 
+          });
+
+        
       };
       
       
   const handleBackgroundServicesChange = (e) => {
     const { name, checked } = e.target;
 
-    setchecklistresults((prevChecklist) => {
-      // Create a shallow copy of the checklistresults
-      const updatedChecklist = { ...prevChecklist };
+    const newstate = {
+      ...checklistresults,
+          }
 
-      // Create a shallow copy of BestPerformance
-      const updatedBestPerformance = { ...updatedChecklist.BestPerformace };
-
-      // Update the BackgroundServices property
-      updatedBestPerformance.BackgroundServices = checked;
-
-      // Update the BestPerformance property in the checklistresults
-      updatedChecklist.BestPerformace = updatedBestPerformance;
-
-      return updatedChecklist;
-    });
+    newstate.BestPerformace.BackgroundServices = checked
+    setchecklistresults(newstate)
+    
+    socket.emit("eventFromClient", newstate, (response) => {
+         console.log("Server acknowledged the updateEvent with response:", response); 
+      });
+    
   };
 
 const submitchanges = ()=>{
@@ -158,7 +162,7 @@ const submitchanges = ()=>{
         }
         /* {DriveSpace:false} */
     ).then((result) =>{
-        console.log(result)
+        /* console.log(result) */
 
         const doc = new jsPDF();
         doc.text(`
